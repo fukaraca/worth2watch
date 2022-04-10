@@ -1,0 +1,1011 @@
+
+
+[31m2022/04/10 15:36:32 [Recovery] 2022/04/10 - 15:36:32 panic recovered:
+POST /register HTTP/1.1
+Host: localhost:8080
+Accept: */*
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+Content-Length: 143
+Content-Type: text/plain
+Postman-Token: 83089280-b154-4c3f-8314-6aae68e35c4d
+User-Agent: PostmanRuntime/7.29.0
+
+
+runtime error: invalid memory address or nil pointer dereference
+/home/fukaraca/sdk/go1.18/src/runtime/panic.go:220 (0x44a795)
+	panicmem: panic(memoryError)
+/home/fukaraca/sdk/go1.18/src/runtime/signal_unix.go:818 (0x44a765)
+	sigpanic: panicmem()
+/home/fukaraca/go/src/github.com/fukaraca/worth2watch/handlers.go:59 (0x805038)
+	checkRegistration: _, err = db.Conn.Exec(ctx, "INSERT INTO users (user_id,username,password,email,name,lastname,createdon,lastlogin,isadmin) VALUES (nextval('users_user_id_seq'),$1,$2,$3,$4,$5,$6,$7,$8);", *striper(newUser.Username), newUser.Password, *striper(newUser.Email), *striper(newUser.Name), *striper(newUser.Lastname), newUser.CreatedOn.Time, newUser.LastLogin.Time, newUser.Isadmin)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x7fc341)
+	(*Context).Next: c.handlers[c.index](c)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/recovery.go:99 (0x7fc32c)
+	CustomRecoveryWithWriter.func1: c.Next()
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x7fb466)
+	(*Context).Next: c.handlers[c.index](c)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/logger.go:241 (0x7fb449)
+	LoggerWithConfig.func1: c.Next()
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x7fa530)
+	(*Context).Next: c.handlers[c.index](c)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/gin.go:555 (0x7fa198)
+	(*Engine).handleHTTPRequest: c.Next()
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/gin.go:511 (0x7f9e51)
+	(*Engine).ServeHTTP: engine.handleHTTPRequest(c)
+/home/fukaraca/sdk/go1.18/src/net/http/server.go:2916 (0x72b33a)
+	serverHandler.ServeHTTP: handler.ServeHTTP(rw, req)
+/home/fukaraca/sdk/go1.18/src/net/http/server.go:1966 (0x727af6)
+	(*conn).serve: serverHandler{c.server}.ServeHTTP(w, w.req)
+/home/fukaraca/sdk/go1.18/src/runtime/asm_amd64.s:1571 (0x464840)
+	goexit: BYTE	$0x90	// NOP
+[0m
+
+
+[31m2022/04/10 15:51:53 [Recovery] 2022/04/10 - 15:51:53 panic recovered:
+POST /register HTTP/1.1
+Host: localhost:8080
+Accept: */*
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+Content-Length: 165
+Content-Type: text/plain
+Postman-Token: 566ae3f6-3d79-4ae2-b8d8-e78963c437b1
+User-Agent: PostmanRuntime/7.29.0
+
+
+runtime error: invalid memory address or nil pointer dereference
+/home/fukaraca/sdk/go1.18/src/runtime/panic.go:220 (0x44a795)
+	panicmem: panic(memoryError)
+/home/fukaraca/sdk/go1.18/src/runtime/signal_unix.go:818 (0x44a765)
+	sigpanic: panicmem()
+/home/fukaraca/go/src/github.com/fukaraca/worth2watch/handlers.go:47 (0x806faa)
+	checkRegistration: newUser.Username = *striper(newUser.Username)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x7fc341)
+	(*Context).Next: c.handlers[c.index](c)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/recovery.go:99 (0x7fc32c)
+	CustomRecoveryWithWriter.func1: c.Next()
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x7fb466)
+	(*Context).Next: c.handlers[c.index](c)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/logger.go:241 (0x7fb449)
+	LoggerWithConfig.func1: c.Next()
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x7fa530)
+	(*Context).Next: c.handlers[c.index](c)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/gin.go:555 (0x7fa198)
+	(*Engine).handleHTTPRequest: c.Next()
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/gin.go:511 (0x7f9e51)
+	(*Engine).ServeHTTP: engine.handleHTTPRequest(c)
+/home/fukaraca/sdk/go1.18/src/net/http/server.go:2916 (0x72b33a)
+	serverHandler.ServeHTTP: handler.ServeHTTP(rw, req)
+/home/fukaraca/sdk/go1.18/src/net/http/server.go:1966 (0x727af6)
+	(*conn).serve: serverHandler{c.server}.ServeHTTP(w, w.req)
+/home/fukaraca/sdk/go1.18/src/runtime/asm_amd64.s:1571 (0x464840)
+	goexit: BYTE	$0x90	// NOP
+[0m
+
+
+[31m2022/04/10 16:01:55 [Recovery] 2022/04/10 - 16:01:55 panic recovered:
+POST /register HTTP/1.1
+Host: localhost:8080
+Accept: */*
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+Content-Length: 165
+Content-Type: text/plain
+Postman-Token: 86a2d64a-5adb-4b89-b061-b8937c0d123b
+User-Agent: PostmanRuntime/7.29.0
+
+
+runtime error: invalid memory address or nil pointer dereference
+/home/fukaraca/sdk/go1.18/src/runtime/panic.go:220 (0x44a795)
+	panicmem: panic(memoryError)
+/home/fukaraca/sdk/go1.18/src/runtime/signal_unix.go:818 (0x44a765)
+	sigpanic: panicmem()
+/home/fukaraca/go/src/github.com/fukaraca/worth2watch/handlers.go:48 (0x8076b8)
+	checkRegistration.func1: user.Username = *striper(user.Username)
+/home/fukaraca/go/src/github.com/fukaraca/worth2watch/handlers.go:59 (0x806f98)
+	checkRegistration: err = checkIfNil(newUser)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x7fc341)
+	(*Context).Next: c.handlers[c.index](c)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/recovery.go:99 (0x7fc32c)
+	CustomRecoveryWithWriter.func1: c.Next()
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x7fb466)
+	(*Context).Next: c.handlers[c.index](c)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/logger.go:241 (0x7fb449)
+	LoggerWithConfig.func1: c.Next()
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x7fa530)
+	(*Context).Next: c.handlers[c.index](c)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/gin.go:555 (0x7fa198)
+	(*Engine).handleHTTPRequest: c.Next()
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/gin.go:511 (0x7f9e51)
+	(*Engine).ServeHTTP: engine.handleHTTPRequest(c)
+/home/fukaraca/sdk/go1.18/src/net/http/server.go:2916 (0x72b33a)
+	serverHandler.ServeHTTP: handler.ServeHTTP(rw, req)
+/home/fukaraca/sdk/go1.18/src/net/http/server.go:1966 (0x727af6)
+	(*conn).serve: serverHandler{c.server}.ServeHTTP(w, w.req)
+/home/fukaraca/sdk/go1.18/src/runtime/asm_amd64.s:1571 (0x464840)
+	goexit: BYTE	$0x90	// NOP
+[0m
+
+
+[31m2022/04/10 16:11:58 [Recovery] 2022/04/10 - 16:11:58 panic recovered:
+POST /register HTTP/1.1
+Host: localhost:8080
+Accept: */*
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+Content-Length: 148
+Content-Type: text/plain
+Postman-Token: 784bf985-25f0-440a-89d0-347daafc4a26
+User-Agent: PostmanRuntime/7.29.0
+
+
+runtime error: invalid memory address or nil pointer dereference
+/home/fukaraca/sdk/go1.18/src/runtime/panic.go:220 (0x44a795)
+	panicmem: panic(memoryError)
+/home/fukaraca/sdk/go1.18/src/runtime/signal_unix.go:818 (0x44a765)
+	sigpanic: panicmem()
+/home/fukaraca/go/src/github.com/fukaraca/worth2watch/handlers.go:55 (0x806fc6)
+	checkRegistration: newUser.Name = *striper(newUser.Name)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x7fc341)
+	(*Context).Next: c.handlers[c.index](c)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/recovery.go:99 (0x7fc32c)
+	CustomRecoveryWithWriter.func1: c.Next()
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x7fb466)
+	(*Context).Next: c.handlers[c.index](c)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/logger.go:241 (0x7fb449)
+	LoggerWithConfig.func1: c.Next()
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x7fa530)
+	(*Context).Next: c.handlers[c.index](c)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/gin.go:555 (0x7fa198)
+	(*Engine).handleHTTPRequest: c.Next()
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/gin.go:511 (0x7f9e51)
+	(*Engine).ServeHTTP: engine.handleHTTPRequest(c)
+/home/fukaraca/sdk/go1.18/src/net/http/server.go:2916 (0x72b33a)
+	serverHandler.ServeHTTP: handler.ServeHTTP(rw, req)
+/home/fukaraca/sdk/go1.18/src/net/http/server.go:1966 (0x727af6)
+	(*conn).serve: serverHandler{c.server}.ServeHTTP(w, w.req)
+/home/fukaraca/sdk/go1.18/src/runtime/asm_amd64.s:1571 (0x464840)
+	goexit: BYTE	$0x90	// NOP
+[0m
+[GIN-debug] [ERROR] listen tcp :8080: bind: address already in use
+
+
+[31m2022/04/10 22:49:13 [Recovery] 2022/04/10 - 22:49:13 panic recovered:
+GET /user/wufiyu HTTP/1.1
+Host: localhost:8080
+Accept: */*
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+Cookie: session_token=286eed18-19bd-4c69-8b23-65435a5c2bc2; uid=fukaraca
+Postman-Token: bfd34184-105c-4f79-8939-f28807abecbe
+User-Agent: PostmanRuntime/7.29.0
+X-Request-Id: b16fb599-6a98-4a8f-9a89-7eb2afddfddc
+
+
+interface conversion: interface {} is string, not bool
+/home/fukaraca/sdk/go1.18/src/runtime/iface.go:262 (0x40bf69)
+	panicdottypeE: panic(&TypeAssertionError{iface, have, want, ""})
+/home/fukaraca/go/src/github.com/fukaraca/worth2watch/auth/authentication.go:116 (0x84f716)
+	CheckAdminForLoggedIn: if cookieVal.(bool) {
+/home/fukaraca/go/src/github.com/fukaraca/worth2watch/api/handlers.go:182 (0x8542a4)
+	GetUserInfo: if usernameP != username && !auth.CheckAdminForLoggedIn(c, username) {
+/home/fukaraca/go/src/github.com/fukaraca/worth2watch/api/handlers.go:29 (0x8526cd)
+	Auth.func1: fn(c)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x84baa3)
+	(*Context).Next: c.handlers[c.index](c)
+/home/fukaraca/go/pkg/mod/github.com/gin-contrib/requestid@v0.0.3/requestid.go:42 (0x84ba8a)
+	New.func2: c.Next()
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x843ae1)
+	(*Context).Next: c.handlers[c.index](c)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/recovery.go:99 (0x843acc)
+	CustomRecoveryWithWriter.func1: c.Next()
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x842c06)
+	(*Context).Next: c.handlers[c.index](c)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/logger.go:241 (0x842be9)
+	LoggerWithConfig.func1: c.Next()
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x841cd0)
+	(*Context).Next: c.handlers[c.index](c)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/gin.go:555 (0x841938)
+	(*Engine).handleHTTPRequest: c.Next()
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/gin.go:511 (0x8415f1)
+	(*Engine).ServeHTTP: engine.handleHTTPRequest(c)
+/home/fukaraca/sdk/go1.18/src/net/http/server.go:2916 (0x77241a)
+	serverHandler.ServeHTTP: handler.ServeHTTP(rw, req)
+/home/fukaraca/sdk/go1.18/src/net/http/server.go:1966 (0x76ebd6)
+	(*conn).serve: serverHandler{c.server}.ServeHTTP(w, w.req)
+/home/fukaraca/sdk/go1.18/src/runtime/asm_amd64.s:1571 (0x4648c0)
+	goexit: BYTE	$0x90	// NOP
+[0m
+
+
+[31m2022/04/10 22:49:45 [Recovery] 2022/04/10 - 22:49:45 panic recovered:
+GET /user/wufiyu HTTP/1.1
+Host: localhost:8080
+Accept: */*
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+Cookie: session_token=286eed18-19bd-4c69-8b23-65435a5c2bc2; uid=fukaraca
+Postman-Token: 5ace05b5-65cb-4573-b028-3f1de00e8140
+User-Agent: PostmanRuntime/7.29.0
+X-Request-Id: 10e1d631-9aae-4681-969e-3d7bc121a5b9
+
+
+interface conversion: interface {} is string, not bool
+/home/fukaraca/sdk/go1.18/src/runtime/iface.go:262 (0x40bf69)
+	panicdottypeE: panic(&TypeAssertionError{iface, have, want, ""})
+/home/fukaraca/go/src/github.com/fukaraca/worth2watch/auth/authentication.go:117 (0x84f792)
+	CheckAdminForLoggedIn: if cookieVal.(bool) {
+/home/fukaraca/go/src/github.com/fukaraca/worth2watch/api/handlers.go:182 (0x854324)
+	GetUserInfo: if usernameP != username && !auth.CheckAdminForLoggedIn(c, username) {
+/home/fukaraca/go/src/github.com/fukaraca/worth2watch/api/handlers.go:29 (0x85274d)
+	Auth.func1: fn(c)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x84baa3)
+	(*Context).Next: c.handlers[c.index](c)
+/home/fukaraca/go/pkg/mod/github.com/gin-contrib/requestid@v0.0.3/requestid.go:42 (0x84ba8a)
+	New.func2: c.Next()
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x843ae1)
+	(*Context).Next: c.handlers[c.index](c)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/recovery.go:99 (0x843acc)
+	CustomRecoveryWithWriter.func1: c.Next()
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x842c06)
+	(*Context).Next: c.handlers[c.index](c)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/logger.go:241 (0x842be9)
+	LoggerWithConfig.func1: c.Next()
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x841cd0)
+	(*Context).Next: c.handlers[c.index](c)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/gin.go:555 (0x841938)
+	(*Engine).handleHTTPRequest: c.Next()
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/gin.go:511 (0x8415f1)
+	(*Engine).ServeHTTP: engine.handleHTTPRequest(c)
+/home/fukaraca/sdk/go1.18/src/net/http/server.go:2916 (0x77241a)
+	serverHandler.ServeHTTP: handler.ServeHTTP(rw, req)
+/home/fukaraca/sdk/go1.18/src/net/http/server.go:1966 (0x76ebd6)
+	(*conn).serve: serverHandler{c.server}.ServeHTTP(w, w.req)
+/home/fukaraca/sdk/go1.18/src/runtime/asm_amd64.s:1571 (0x4648c0)
+	goexit: BYTE	$0x90	// NOP
+[0m
+
+
+[31m2022/04/10 22:53:15 [Recovery] 2022/04/10 - 22:53:15 panic recovered:
+GET /user/wufiyu HTTP/1.1
+Host: localhost:8080
+Accept: */*
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+Cookie: session_token=286eed18-19bd-4c69-8b23-65435a5c2bc2; uid=fukaraca
+Postman-Token: 3aa40072-c15c-47de-ad8a-6975b3f95b79
+User-Agent: PostmanRuntime/7.29.0
+X-Request-Id: a7b7a259-9f7f-44e0-8957-2ca390b66ace
+
+
+interface conversion: interface {} is string, not bool
+/home/fukaraca/sdk/go1.18/src/runtime/iface.go:262 (0x40bf69)
+	panicdottypeE: panic(&TypeAssertionError{iface, have, want, ""})
+/home/fukaraca/go/src/github.com/fukaraca/worth2watch/auth/authentication.go:117 (0x84f5f2)
+	CheckAdminForLoggedIn: if cookieVal.(bool) {
+/home/fukaraca/go/src/github.com/fukaraca/worth2watch/api/handlers.go:182 (0x854184)
+	GetUserInfo: if usernameP != username && !auth.CheckAdminForLoggedIn(c, username) {
+/home/fukaraca/go/src/github.com/fukaraca/worth2watch/api/handlers.go:29 (0x8525ad)
+	Auth.func1: fn(c)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x84b903)
+	(*Context).Next: c.handlers[c.index](c)
+/home/fukaraca/go/pkg/mod/github.com/gin-contrib/requestid@v0.0.3/requestid.go:42 (0x84b8ea)
+	New.func2: c.Next()
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x843ae1)
+	(*Context).Next: c.handlers[c.index](c)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/recovery.go:99 (0x843acc)
+	CustomRecoveryWithWriter.func1: c.Next()
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x842c06)
+	(*Context).Next: c.handlers[c.index](c)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/logger.go:241 (0x842be9)
+	LoggerWithConfig.func1: c.Next()
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x841cd0)
+	(*Context).Next: c.handlers[c.index](c)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/gin.go:555 (0x841938)
+	(*Engine).handleHTTPRequest: c.Next()
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/gin.go:511 (0x8415f1)
+	(*Engine).ServeHTTP: engine.handleHTTPRequest(c)
+/home/fukaraca/sdk/go1.18/src/net/http/server.go:2916 (0x77241a)
+	serverHandler.ServeHTTP: handler.ServeHTTP(rw, req)
+/home/fukaraca/sdk/go1.18/src/net/http/server.go:1966 (0x76ebd6)
+	(*conn).serve: serverHandler{c.server}.ServeHTTP(w, w.req)
+/home/fukaraca/sdk/go1.18/src/runtime/asm_amd64.s:1571 (0x4648c0)
+	goexit: BYTE	$0x90	// NOP
+[0m
+
+
+[31m2022/04/10 22:54:06 [Recovery] 2022/04/10 - 22:54:06 panic recovered:
+GET /user/wufiyu HTTP/1.1
+Host: localhost:8080
+Accept: */*
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+Cookie: session_token=286eed18-19bd-4c69-8b23-65435a5c2bc2; uid=fukaraca
+Postman-Token: 6347cd89-67fb-47cc-8904-47085af2eb67
+User-Agent: PostmanRuntime/7.29.0
+X-Request-Id: 9c25ac37-c0e5-44f2-a62f-9a94ef4d4b26
+
+
+interface conversion: interface {} is string, not int
+/home/fukaraca/sdk/go1.18/src/runtime/iface.go:262 (0x40bf69)
+	panicdottypeE: panic(&TypeAssertionError{iface, have, want, ""})
+/home/fukaraca/go/src/github.com/fukaraca/worth2watch/auth/authentication.go:117 (0x84f5f3)
+	CheckAdminForLoggedIn: if cookieVal.(int) == 1 {
+/home/fukaraca/go/src/github.com/fukaraca/worth2watch/api/handlers.go:182 (0x854184)
+	GetUserInfo: if usernameP != username && !auth.CheckAdminForLoggedIn(c, username) {
+/home/fukaraca/go/src/github.com/fukaraca/worth2watch/api/handlers.go:29 (0x8525ad)
+	Auth.func1: fn(c)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x84b903)
+	(*Context).Next: c.handlers[c.index](c)
+/home/fukaraca/go/pkg/mod/github.com/gin-contrib/requestid@v0.0.3/requestid.go:42 (0x84b8ea)
+	New.func2: c.Next()
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x843ae1)
+	(*Context).Next: c.handlers[c.index](c)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/recovery.go:99 (0x843acc)
+	CustomRecoveryWithWriter.func1: c.Next()
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x842c06)
+	(*Context).Next: c.handlers[c.index](c)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/logger.go:241 (0x842be9)
+	LoggerWithConfig.func1: c.Next()
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x841cd0)
+	(*Context).Next: c.handlers[c.index](c)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/gin.go:555 (0x841938)
+	(*Engine).handleHTTPRequest: c.Next()
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/gin.go:511 (0x8415f1)
+	(*Engine).ServeHTTP: engine.handleHTTPRequest(c)
+/home/fukaraca/sdk/go1.18/src/net/http/server.go:2916 (0x77241a)
+	serverHandler.ServeHTTP: handler.ServeHTTP(rw, req)
+/home/fukaraca/sdk/go1.18/src/net/http/server.go:1966 (0x76ebd6)
+	(*conn).serve: serverHandler{c.server}.ServeHTTP(w, w.req)
+/home/fukaraca/sdk/go1.18/src/runtime/asm_amd64.s:1571 (0x4648c0)
+	goexit: BYTE	$0x90	// NOP
+[0m
+
+
+[31m2022/04/10 23:00:55 [Recovery] 2022/04/10 - 23:00:55 panic recovered:
+GET /user/wufiyu HTTP/1.1
+Host: localhost:8080
+Accept: */*
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+Cookie: session_token=286eed18-19bd-4c69-8b23-65435a5c2bc2; uid=fukaraca
+Postman-Token: 2763aa67-3fac-4cc5-9a30-37655166d773
+User-Agent: PostmanRuntime/7.29.0
+X-Request-Id: c4393e1b-9d50-45ad-9ffa-9d252c4fdaba
+
+
+interface conversion: interface {} is string, not int
+/home/fukaraca/sdk/go1.18/src/runtime/iface.go:262 (0x40bf69)
+	panicdottypeE: panic(&TypeAssertionError{iface, have, want, ""})
+/home/fukaraca/go/src/github.com/fukaraca/worth2watch/auth/authentication.go:117 (0x84f6e8)
+	CheckAdminForLoggedIn: if cookieVal.(int) == 1 {
+/home/fukaraca/go/src/github.com/fukaraca/worth2watch/api/handlers.go:182 (0x854284)
+	GetUserInfo: if usernameP != username && !auth.CheckAdminForLoggedIn(c, username) {
+/home/fukaraca/go/src/github.com/fukaraca/worth2watch/api/handlers.go:29 (0x8526ad)
+	Auth.func1: fn(c)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x84b903)
+	(*Context).Next: c.handlers[c.index](c)
+/home/fukaraca/go/pkg/mod/github.com/gin-contrib/requestid@v0.0.3/requestid.go:42 (0x84b8ea)
+	New.func2: c.Next()
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x843ae1)
+	(*Context).Next: c.handlers[c.index](c)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/recovery.go:99 (0x843acc)
+	CustomRecoveryWithWriter.func1: c.Next()
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x842c06)
+	(*Context).Next: c.handlers[c.index](c)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/logger.go:241 (0x842be9)
+	LoggerWithConfig.func1: c.Next()
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x841cd0)
+	(*Context).Next: c.handlers[c.index](c)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/gin.go:555 (0x841938)
+	(*Engine).handleHTTPRequest: c.Next()
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/gin.go:511 (0x8415f1)
+	(*Engine).ServeHTTP: engine.handleHTTPRequest(c)
+/home/fukaraca/sdk/go1.18/src/net/http/server.go:2916 (0x77241a)
+	serverHandler.ServeHTTP: handler.ServeHTTP(rw, req)
+/home/fukaraca/sdk/go1.18/src/net/http/server.go:1966 (0x76ebd6)
+	(*conn).serve: serverHandler{c.server}.ServeHTTP(w, w.req)
+/home/fukaraca/sdk/go1.18/src/runtime/asm_amd64.s:1571 (0x4648c0)
+	goexit: BYTE	$0x90	// NOP
+[0m
+
+
+[31m2022/04/11 00:13:09 [Recovery] 2022/04/11 - 00:13:09 panic recovered:
+GET /user/wufiyu HTTP/1.1
+Host: localhost:8080
+Accept: */*
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+Cookie: session_token=7f82454d-67b9-4c3f-b5b1-3b5c9de6a41a; uid=fukaraca
+Postman-Token: c80b3ccd-a9cc-4e72-abf9-f6ea8dfb96df
+User-Agent: PostmanRuntime/7.29.0
+X-Request-Id: 3af9d4ff-d5e2-493a-888b-c7c7e4ae4399
+
+
+json: error calling MarshalJSON for type pgtype.Timestamptz: cannot encode status undefined
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/render/json.go:56 (0x83e75e)
+	JSON.Render: panic(err)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:927 (0x840977)
+	(*Context).Render: if err := r.Render(c.Writer); err != nil {
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:970 (0x85b184)
+	(*Context).JSON: c.Render(code, render.JSON{Data: obj})
+/home/fukaraca/go/src/github.com/fukaraca/worth2watch/api/handlers.go:196 (0x85b12d)
+	GetUserInfo: c.JSON(http.StatusOK, user)
+/home/fukaraca/go/src/github.com/fukaraca/worth2watch/api/handlers.go:29 (0x8593ed)
+	Auth.func1: fn(c)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x8527a3)
+	(*Context).Next: c.handlers[c.index](c)
+/home/fukaraca/go/pkg/mod/github.com/gin-contrib/requestid@v0.0.3/requestid.go:42 (0x85278a)
+	New.func2: c.Next()
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x844f21)
+	(*Context).Next: c.handlers[c.index](c)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/recovery.go:99 (0x844f0c)
+	CustomRecoveryWithWriter.func1: c.Next()
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x844046)
+	(*Context).Next: c.handlers[c.index](c)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/logger.go:241 (0x844029)
+	LoggerWithConfig.func1: c.Next()
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x843110)
+	(*Context).Next: c.handlers[c.index](c)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/gin.go:555 (0x842d78)
+	(*Engine).handleHTTPRequest: c.Next()
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/gin.go:511 (0x842a31)
+	(*Engine).ServeHTTP: engine.handleHTTPRequest(c)
+/home/fukaraca/sdk/go1.18/src/net/http/server.go:2916 (0x77385a)
+	serverHandler.ServeHTTP: handler.ServeHTTP(rw, req)
+/home/fukaraca/sdk/go1.18/src/net/http/server.go:1966 (0x770016)
+	(*conn).serve: serverHandler{c.server}.ServeHTTP(w, w.req)
+/home/fukaraca/sdk/go1.18/src/runtime/asm_amd64.s:1571 (0x464980)
+	goexit: BYTE	$0x90	// NOP
+[0m
+
+
+[31m2022/04/11 00:14:23 [Recovery] 2022/04/11 - 00:14:23 panic recovered:
+GET /user/wufiyu HTTP/1.1
+Host: localhost:8080
+Accept: */*
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+Cookie: session_token=7f82454d-67b9-4c3f-b5b1-3b5c9de6a41a; uid=fukaraca
+Postman-Token: fada2cf4-2cc1-4a29-8079-b2b2592dcebf
+User-Agent: PostmanRuntime/7.29.0
+X-Request-Id: 80211701-337c-47eb-a51a-a87ea3b75b01
+
+
+json: error calling MarshalJSON for type pgtype.Timestamptz: cannot encode status undefined
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/render/json.go:56 (0x83e75e)
+	JSON.Render: panic(err)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:927 (0x840977)
+	(*Context).Render: if err := r.Render(c.Writer); err != nil {
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:970 (0x85b144)
+	(*Context).JSON: c.Render(code, render.JSON{Data: obj})
+/home/fukaraca/go/src/github.com/fukaraca/worth2watch/api/handlers.go:196 (0x85b0ed)
+	GetUserInfo: c.JSON(http.StatusOK, user)
+/home/fukaraca/go/src/github.com/fukaraca/worth2watch/api/handlers.go:29 (0x8593ad)
+	Auth.func1: fn(c)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x852763)
+	(*Context).Next: c.handlers[c.index](c)
+/home/fukaraca/go/pkg/mod/github.com/gin-contrib/requestid@v0.0.3/requestid.go:42 (0x85274a)
+	New.func2: c.Next()
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x844f21)
+	(*Context).Next: c.handlers[c.index](c)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/recovery.go:99 (0x844f0c)
+	CustomRecoveryWithWriter.func1: c.Next()
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x844046)
+	(*Context).Next: c.handlers[c.index](c)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/logger.go:241 (0x844029)
+	LoggerWithConfig.func1: c.Next()
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x843110)
+	(*Context).Next: c.handlers[c.index](c)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/gin.go:555 (0x842d78)
+	(*Engine).handleHTTPRequest: c.Next()
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/gin.go:511 (0x842a31)
+	(*Engine).ServeHTTP: engine.handleHTTPRequest(c)
+/home/fukaraca/sdk/go1.18/src/net/http/server.go:2916 (0x77385a)
+	serverHandler.ServeHTTP: handler.ServeHTTP(rw, req)
+/home/fukaraca/sdk/go1.18/src/net/http/server.go:1966 (0x770016)
+	(*conn).serve: serverHandler{c.server}.ServeHTTP(w, w.req)
+/home/fukaraca/sdk/go1.18/src/runtime/asm_amd64.s:1571 (0x464980)
+	goexit: BYTE	$0x90	// NOP
+[0m
+
+
+[31m2022/04/11 00:22:20 [Recovery] 2022/04/11 - 00:22:20 panic recovered:
+GET /user/wufiyu HTTP/1.1
+Host: localhost:8080
+Accept: */*
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+Cookie: session_token=7f82454d-67b9-4c3f-b5b1-3b5c9de6a41a; uid=fukaraca
+Postman-Token: 1334c674-39cf-48ca-8cfa-cb1bd6ef1ed6
+User-Agent: PostmanRuntime/7.29.0
+X-Request-Id: 82ff3d95-4db5-47c6-883a-17c3611f672f
+
+
+json: error calling MarshalJSON for type pgtype.Timestamptz: cannot encode status undefined
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/render/json.go:56 (0x83e75e)
+	JSON.Render: panic(err)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:927 (0x840977)
+	(*Context).Render: if err := r.Render(c.Writer); err != nil {
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:970 (0x85b144)
+	(*Context).JSON: c.Render(code, render.JSON{Data: obj})
+/home/fukaraca/go/src/github.com/fukaraca/worth2watch/api/handlers.go:196 (0x85b0ed)
+	GetUserInfo: c.JSON(http.StatusOK, user)
+/home/fukaraca/go/src/github.com/fukaraca/worth2watch/api/handlers.go:29 (0x8593ad)
+	Auth.func1: fn(c)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x852763)
+	(*Context).Next: c.handlers[c.index](c)
+/home/fukaraca/go/pkg/mod/github.com/gin-contrib/requestid@v0.0.3/requestid.go:42 (0x85274a)
+	New.func2: c.Next()
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x844f21)
+	(*Context).Next: c.handlers[c.index](c)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/recovery.go:99 (0x844f0c)
+	CustomRecoveryWithWriter.func1: c.Next()
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x844046)
+	(*Context).Next: c.handlers[c.index](c)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/logger.go:241 (0x844029)
+	LoggerWithConfig.func1: c.Next()
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x843110)
+	(*Context).Next: c.handlers[c.index](c)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/gin.go:555 (0x842d78)
+	(*Engine).handleHTTPRequest: c.Next()
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/gin.go:511 (0x842a31)
+	(*Engine).ServeHTTP: engine.handleHTTPRequest(c)
+/home/fukaraca/sdk/go1.18/src/net/http/server.go:2916 (0x77385a)
+	serverHandler.ServeHTTP: handler.ServeHTTP(rw, req)
+/home/fukaraca/sdk/go1.18/src/net/http/server.go:1966 (0x770016)
+	(*conn).serve: serverHandler{c.server}.ServeHTTP(w, w.req)
+/home/fukaraca/sdk/go1.18/src/runtime/asm_amd64.s:1571 (0x464980)
+	goexit: BYTE	$0x90	// NOP
+[0m
+
+
+[31m2022/04/11 00:30:22 [Recovery] 2022/04/11 - 00:30:22 panic recovered:
+GET /user/wufiyu HTTP/1.1
+Host: localhost:8080
+Accept: */*
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+Cookie: session_token=7f82454d-67b9-4c3f-b5b1-3b5c9de6a41a; uid=fukaraca
+Postman-Token: 7c68c0ad-e65b-457c-91a1-b91ec719630c
+User-Agent: PostmanRuntime/7.29.0
+X-Request-Id: 99913c24-b897-46e1-a137-904eb5268b87
+
+
+json: error calling MarshalJSON for type pgtype.Timestamptz: cannot encode status undefined
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/render/json.go:56 (0x83e75e)
+	JSON.Render: panic(err)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:927 (0x840977)
+	(*Context).Render: if err := r.Render(c.Writer); err != nil {
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:970 (0x85b144)
+	(*Context).JSON: c.Render(code, render.JSON{Data: obj})
+/home/fukaraca/go/src/github.com/fukaraca/worth2watch/api/handlers.go:196 (0x85b0ed)
+	GetUserInfo: c.JSON(http.StatusOK, user)
+/home/fukaraca/go/src/github.com/fukaraca/worth2watch/api/handlers.go:29 (0x8593ad)
+	Auth.func1: fn(c)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x852763)
+	(*Context).Next: c.handlers[c.index](c)
+/home/fukaraca/go/pkg/mod/github.com/gin-contrib/requestid@v0.0.3/requestid.go:42 (0x85274a)
+	New.func2: c.Next()
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x844f21)
+	(*Context).Next: c.handlers[c.index](c)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/recovery.go:99 (0x844f0c)
+	CustomRecoveryWithWriter.func1: c.Next()
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x844046)
+	(*Context).Next: c.handlers[c.index](c)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/logger.go:241 (0x844029)
+	LoggerWithConfig.func1: c.Next()
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x843110)
+	(*Context).Next: c.handlers[c.index](c)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/gin.go:555 (0x842d78)
+	(*Engine).handleHTTPRequest: c.Next()
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/gin.go:511 (0x842a31)
+	(*Engine).ServeHTTP: engine.handleHTTPRequest(c)
+/home/fukaraca/sdk/go1.18/src/net/http/server.go:2916 (0x77385a)
+	serverHandler.ServeHTTP: handler.ServeHTTP(rw, req)
+/home/fukaraca/sdk/go1.18/src/net/http/server.go:1966 (0x770016)
+	(*conn).serve: serverHandler{c.server}.ServeHTTP(w, w.req)
+/home/fukaraca/sdk/go1.18/src/runtime/asm_amd64.s:1571 (0x464980)
+	goexit: BYTE	$0x90	// NOP
+[0m
+
+
+[31m2022/04/11 00:30:40 [Recovery] 2022/04/11 - 00:30:40 panic recovered:
+GET /user/wufiyu HTTP/1.1
+Host: localhost:8080
+Accept: */*
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+Cookie: session_token=7f82454d-67b9-4c3f-b5b1-3b5c9de6a41a; uid=fukaraca
+Postman-Token: ea67db72-6a3a-4f5b-ae0b-27d555b03eca
+User-Agent: PostmanRuntime/7.29.0
+X-Request-Id: 3f0bf717-eac0-4503-a434-7cd4085ffffb
+
+
+json: error calling MarshalJSON for type pgtype.Timestamptz: cannot encode status undefined
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/render/json.go:56 (0x83e75e)
+	JSON.Render: panic(err)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:927 (0x840977)
+	(*Context).Render: if err := r.Render(c.Writer); err != nil {
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:970 (0x85b144)
+	(*Context).JSON: c.Render(code, render.JSON{Data: obj})
+/home/fukaraca/go/src/github.com/fukaraca/worth2watch/api/handlers.go:196 (0x85b0ed)
+	GetUserInfo: c.JSON(http.StatusOK, user)
+/home/fukaraca/go/src/github.com/fukaraca/worth2watch/api/handlers.go:29 (0x8593ad)
+	Auth.func1: fn(c)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x852763)
+	(*Context).Next: c.handlers[c.index](c)
+/home/fukaraca/go/pkg/mod/github.com/gin-contrib/requestid@v0.0.3/requestid.go:42 (0x85274a)
+	New.func2: c.Next()
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x844f21)
+	(*Context).Next: c.handlers[c.index](c)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/recovery.go:99 (0x844f0c)
+	CustomRecoveryWithWriter.func1: c.Next()
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x844046)
+	(*Context).Next: c.handlers[c.index](c)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/logger.go:241 (0x844029)
+	LoggerWithConfig.func1: c.Next()
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x843110)
+	(*Context).Next: c.handlers[c.index](c)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/gin.go:555 (0x842d78)
+	(*Engine).handleHTTPRequest: c.Next()
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/gin.go:511 (0x842a31)
+	(*Engine).ServeHTTP: engine.handleHTTPRequest(c)
+/home/fukaraca/sdk/go1.18/src/net/http/server.go:2916 (0x77385a)
+	serverHandler.ServeHTTP: handler.ServeHTTP(rw, req)
+/home/fukaraca/sdk/go1.18/src/net/http/server.go:1966 (0x770016)
+	(*conn).serve: serverHandler{c.server}.ServeHTTP(w, w.req)
+/home/fukaraca/sdk/go1.18/src/runtime/asm_amd64.s:1571 (0x464980)
+	goexit: BYTE	$0x90	// NOP
+[0m
+
+
+[31m2022/04/11 00:44:57 [Recovery] 2022/04/11 - 00:44:57 panic recovered:
+GET /user/wufiyu HTTP/1.1
+Host: localhost:8080
+Accept: */*
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+Cookie: session_token=7f82454d-67b9-4c3f-b5b1-3b5c9de6a41a; uid=fukaraca
+Postman-Token: ac77aac6-65e5-4db7-b499-11c37a936223
+User-Agent: PostmanRuntime/7.29.0
+X-Request-Id: b2ca2369-7242-44cc-a731-4653cc8622d2
+
+
+json: error calling MarshalJSON for type pgtype.Timestamptz: cannot encode status undefined
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/render/json.go:56 (0x83e75e)
+	JSON.Render: panic(err)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:927 (0x840977)
+	(*Context).Render: if err := r.Render(c.Writer); err != nil {
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:970 (0x85b0c4)
+	(*Context).JSON: c.Render(code, render.JSON{Data: obj})
+/home/fukaraca/go/src/github.com/fukaraca/worth2watch/api/handlers.go:196 (0x85b06d)
+	GetUserInfo: c.JSON(http.StatusOK, user)
+/home/fukaraca/go/src/github.com/fukaraca/worth2watch/api/handlers.go:29 (0x85936d)
+	Auth.func1: fn(c)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x852723)
+	(*Context).Next: c.handlers[c.index](c)
+/home/fukaraca/go/pkg/mod/github.com/gin-contrib/requestid@v0.0.3/requestid.go:42 (0x85270a)
+	New.func2: c.Next()
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x844f21)
+	(*Context).Next: c.handlers[c.index](c)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/recovery.go:99 (0x844f0c)
+	CustomRecoveryWithWriter.func1: c.Next()
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x844046)
+	(*Context).Next: c.handlers[c.index](c)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/logger.go:241 (0x844029)
+	LoggerWithConfig.func1: c.Next()
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x843110)
+	(*Context).Next: c.handlers[c.index](c)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/gin.go:555 (0x842d78)
+	(*Engine).handleHTTPRequest: c.Next()
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/gin.go:511 (0x842a31)
+	(*Engine).ServeHTTP: engine.handleHTTPRequest(c)
+/home/fukaraca/sdk/go1.18/src/net/http/server.go:2916 (0x77385a)
+	serverHandler.ServeHTTP: handler.ServeHTTP(rw, req)
+/home/fukaraca/sdk/go1.18/src/net/http/server.go:1966 (0x770016)
+	(*conn).serve: serverHandler{c.server}.ServeHTTP(w, w.req)
+/home/fukaraca/sdk/go1.18/src/runtime/asm_amd64.s:1571 (0x464980)
+	goexit: BYTE	$0x90	// NOP
+[0m
+
+
+[31m2022/04/11 00:48:27 [Recovery] 2022/04/11 - 00:48:27 panic recovered:
+GET /user/wufiyu HTTP/1.1
+Host: localhost:8080
+Accept: */*
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+Cookie: session_token=7f82454d-67b9-4c3f-b5b1-3b5c9de6a41a; uid=fukaraca
+Postman-Token: 6839148e-fbf3-4c5f-ac4f-689987e06976
+User-Agent: PostmanRuntime/7.29.0
+X-Request-Id: 785d41a1-21e7-4e63-9e34-eb905be4e5f3
+
+
+json: error calling MarshalJSON for type pgtype.Timestamptz: cannot encode status undefined
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/render/json.go:56 (0x83e75e)
+	JSON.Render: panic(err)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:927 (0x840977)
+	(*Context).Render: if err := r.Render(c.Writer); err != nil {
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:970 (0x85b0c4)
+	(*Context).JSON: c.Render(code, render.JSON{Data: obj})
+/home/fukaraca/go/src/github.com/fukaraca/worth2watch/api/handlers.go:196 (0x85b06d)
+	GetUserInfo: c.JSON(http.StatusOK, user)
+/home/fukaraca/go/src/github.com/fukaraca/worth2watch/api/handlers.go:29 (0x85936d)
+	Auth.func1: fn(c)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x852723)
+	(*Context).Next: c.handlers[c.index](c)
+/home/fukaraca/go/pkg/mod/github.com/gin-contrib/requestid@v0.0.3/requestid.go:42 (0x85270a)
+	New.func2: c.Next()
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x844f21)
+	(*Context).Next: c.handlers[c.index](c)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/recovery.go:99 (0x844f0c)
+	CustomRecoveryWithWriter.func1: c.Next()
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x844046)
+	(*Context).Next: c.handlers[c.index](c)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/logger.go:241 (0x844029)
+	LoggerWithConfig.func1: c.Next()
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x843110)
+	(*Context).Next: c.handlers[c.index](c)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/gin.go:555 (0x842d78)
+	(*Engine).handleHTTPRequest: c.Next()
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/gin.go:511 (0x842a31)
+	(*Engine).ServeHTTP: engine.handleHTTPRequest(c)
+/home/fukaraca/sdk/go1.18/src/net/http/server.go:2916 (0x77385a)
+	serverHandler.ServeHTTP: handler.ServeHTTP(rw, req)
+/home/fukaraca/sdk/go1.18/src/net/http/server.go:1966 (0x770016)
+	(*conn).serve: serverHandler{c.server}.ServeHTTP(w, w.req)
+/home/fukaraca/sdk/go1.18/src/runtime/asm_amd64.s:1571 (0x464980)
+	goexit: BYTE	$0x90	// NOP
+[0m
+
+
+[31m2022/04/11 00:49:14 [Recovery] 2022/04/11 - 00:49:14 panic recovered:
+GET /user/wufiyu HTTP/1.1
+Host: localhost:8080
+Accept: */*
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+Cookie: session_token=7f82454d-67b9-4c3f-b5b1-3b5c9de6a41a; uid=fukaraca
+Postman-Token: 59533d2c-07e2-4081-894f-90088df0c4ef
+User-Agent: PostmanRuntime/7.29.0
+X-Request-Id: 9a892fa2-8180-46d2-8c99-1e5ee1321e30
+
+
+json: error calling MarshalJSON for type pgtype.Timestamptz: cannot encode status undefined
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/render/json.go:56 (0x83e75e)
+	JSON.Render: panic(err)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:927 (0x840977)
+	(*Context).Render: if err := r.Render(c.Writer); err != nil {
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:970 (0x85b0c4)
+	(*Context).JSON: c.Render(code, render.JSON{Data: obj})
+/home/fukaraca/go/src/github.com/fukaraca/worth2watch/api/handlers.go:196 (0x85b06d)
+	GetUserInfo: c.JSON(http.StatusOK, user)
+/home/fukaraca/go/src/github.com/fukaraca/worth2watch/api/handlers.go:29 (0x85936d)
+	Auth.func1: fn(c)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x852723)
+	(*Context).Next: c.handlers[c.index](c)
+/home/fukaraca/go/pkg/mod/github.com/gin-contrib/requestid@v0.0.3/requestid.go:42 (0x85270a)
+	New.func2: c.Next()
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x844f21)
+	(*Context).Next: c.handlers[c.index](c)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/recovery.go:99 (0x844f0c)
+	CustomRecoveryWithWriter.func1: c.Next()
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x844046)
+	(*Context).Next: c.handlers[c.index](c)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/logger.go:241 (0x844029)
+	LoggerWithConfig.func1: c.Next()
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x843110)
+	(*Context).Next: c.handlers[c.index](c)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/gin.go:555 (0x842d78)
+	(*Engine).handleHTTPRequest: c.Next()
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/gin.go:511 (0x842a31)
+	(*Engine).ServeHTTP: engine.handleHTTPRequest(c)
+/home/fukaraca/sdk/go1.18/src/net/http/server.go:2916 (0x77385a)
+	serverHandler.ServeHTTP: handler.ServeHTTP(rw, req)
+/home/fukaraca/sdk/go1.18/src/net/http/server.go:1966 (0x770016)
+	(*conn).serve: serverHandler{c.server}.ServeHTTP(w, w.req)
+/home/fukaraca/sdk/go1.18/src/runtime/asm_amd64.s:1571 (0x464980)
+	goexit: BYTE	$0x90	// NOP
+[0m
+
+
+[31m2022/04/11 00:49:46 [Recovery] 2022/04/11 - 00:49:46 panic recovered:
+GET /user/wufiyu HTTP/1.1
+Host: localhost:8080
+Accept: */*
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+Cookie: session_token=7f82454d-67b9-4c3f-b5b1-3b5c9de6a41a; uid=fukaraca
+Postman-Token: b35e9c98-3433-482e-b9e6-d05cb9bfeb65
+User-Agent: PostmanRuntime/7.29.0
+X-Request-Id: 0e8086d0-dc0d-45f0-9bc6-77a97ebf448b
+
+
+json: error calling MarshalJSON for type pgtype.Timestamptz: cannot encode status undefined
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/render/json.go:56 (0x83e75e)
+	JSON.Render: panic(err)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:927 (0x840977)
+	(*Context).Render: if err := r.Render(c.Writer); err != nil {
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:970 (0x85b0c4)
+	(*Context).JSON: c.Render(code, render.JSON{Data: obj})
+/home/fukaraca/go/src/github.com/fukaraca/worth2watch/api/handlers.go:196 (0x85b06d)
+	GetUserInfo: c.JSON(http.StatusOK, user)
+/home/fukaraca/go/src/github.com/fukaraca/worth2watch/api/handlers.go:29 (0x85936d)
+	Auth.func1: fn(c)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x852723)
+	(*Context).Next: c.handlers[c.index](c)
+/home/fukaraca/go/pkg/mod/github.com/gin-contrib/requestid@v0.0.3/requestid.go:42 (0x85270a)
+	New.func2: c.Next()
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x844f21)
+	(*Context).Next: c.handlers[c.index](c)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/recovery.go:99 (0x844f0c)
+	CustomRecoveryWithWriter.func1: c.Next()
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x844046)
+	(*Context).Next: c.handlers[c.index](c)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/logger.go:241 (0x844029)
+	LoggerWithConfig.func1: c.Next()
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x843110)
+	(*Context).Next: c.handlers[c.index](c)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/gin.go:555 (0x842d78)
+	(*Engine).handleHTTPRequest: c.Next()
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/gin.go:511 (0x842a31)
+	(*Engine).ServeHTTP: engine.handleHTTPRequest(c)
+/home/fukaraca/sdk/go1.18/src/net/http/server.go:2916 (0x77385a)
+	serverHandler.ServeHTTP: handler.ServeHTTP(rw, req)
+/home/fukaraca/sdk/go1.18/src/net/http/server.go:1966 (0x770016)
+	(*conn).serve: serverHandler{c.server}.ServeHTTP(w, w.req)
+/home/fukaraca/sdk/go1.18/src/runtime/asm_amd64.s:1571 (0x464980)
+	goexit: BYTE	$0x90	// NOP
+[0m
+
+
+[31m2022/04/11 00:56:12 [Recovery] 2022/04/11 - 00:56:12 panic recovered:
+GET /user/wufiyu HTTP/1.1
+Host: localhost:8080
+Accept: */*
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+Cookie: session_token=7f82454d-67b9-4c3f-b5b1-3b5c9de6a41a; uid=fukaraca
+Postman-Token: e56dfa93-b8e1-4c79-bd73-fc5678eb3326
+User-Agent: PostmanRuntime/7.29.0
+X-Request-Id: 8758c21b-a9fa-4173-8c74-7bb5cfc60ca4
+
+
+json: error calling MarshalJSON for type pgtype.Timestamptz: cannot encode status undefined
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/render/json.go:56 (0x83e75e)
+	JSON.Render: panic(err)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:927 (0x840977)
+	(*Context).Render: if err := r.Render(c.Writer); err != nil {
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:970 (0x85b0c4)
+	(*Context).JSON: c.Render(code, render.JSON{Data: obj})
+/home/fukaraca/go/src/github.com/fukaraca/worth2watch/api/handlers.go:196 (0x85b06d)
+	GetUserInfo: c.JSON(http.StatusOK, user)
+/home/fukaraca/go/src/github.com/fukaraca/worth2watch/api/handlers.go:29 (0x85936d)
+	Auth.func1: fn(c)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x852723)
+	(*Context).Next: c.handlers[c.index](c)
+/home/fukaraca/go/pkg/mod/github.com/gin-contrib/requestid@v0.0.3/requestid.go:42 (0x85270a)
+	New.func2: c.Next()
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x844f21)
+	(*Context).Next: c.handlers[c.index](c)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/recovery.go:99 (0x844f0c)
+	CustomRecoveryWithWriter.func1: c.Next()
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x844046)
+	(*Context).Next: c.handlers[c.index](c)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/logger.go:241 (0x844029)
+	LoggerWithConfig.func1: c.Next()
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x843110)
+	(*Context).Next: c.handlers[c.index](c)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/gin.go:555 (0x842d78)
+	(*Engine).handleHTTPRequest: c.Next()
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/gin.go:511 (0x842a31)
+	(*Engine).ServeHTTP: engine.handleHTTPRequest(c)
+/home/fukaraca/sdk/go1.18/src/net/http/server.go:2916 (0x77385a)
+	serverHandler.ServeHTTP: handler.ServeHTTP(rw, req)
+/home/fukaraca/sdk/go1.18/src/net/http/server.go:1966 (0x770016)
+	(*conn).serve: serverHandler{c.server}.ServeHTTP(w, w.req)
+/home/fukaraca/sdk/go1.18/src/runtime/asm_amd64.s:1571 (0x464980)
+	goexit: BYTE	$0x90	// NOP
+[0m
+
+
+[31m2022/04/11 00:56:47 [Recovery] 2022/04/11 - 00:56:47 panic recovered:
+GET /user/wufiyu HTTP/1.1
+Host: localhost:8080
+Accept: */*
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+Cookie: session_token=7f82454d-67b9-4c3f-b5b1-3b5c9de6a41a; uid=fukaraca
+Postman-Token: 7b40623d-f7aa-43fd-8603-74eb0f99c765
+User-Agent: PostmanRuntime/7.29.0
+X-Request-Id: 7b8af7ad-a07c-45b4-84c0-bc20a7dc567a
+
+
+json: error calling MarshalJSON for type pgtype.Timestamptz: cannot encode status undefined
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/render/json.go:56 (0x83e75e)
+	JSON.Render: panic(err)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:927 (0x840977)
+	(*Context).Render: if err := r.Render(c.Writer); err != nil {
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:970 (0x85b0c4)
+	(*Context).JSON: c.Render(code, render.JSON{Data: obj})
+/home/fukaraca/go/src/github.com/fukaraca/worth2watch/api/handlers.go:196 (0x85b06d)
+	GetUserInfo: c.JSON(http.StatusOK, user)
+/home/fukaraca/go/src/github.com/fukaraca/worth2watch/api/handlers.go:29 (0x85936d)
+	Auth.func1: fn(c)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x852723)
+	(*Context).Next: c.handlers[c.index](c)
+/home/fukaraca/go/pkg/mod/github.com/gin-contrib/requestid@v0.0.3/requestid.go:42 (0x85270a)
+	New.func2: c.Next()
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x844f21)
+	(*Context).Next: c.handlers[c.index](c)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/recovery.go:99 (0x844f0c)
+	CustomRecoveryWithWriter.func1: c.Next()
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x844046)
+	(*Context).Next: c.handlers[c.index](c)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/logger.go:241 (0x844029)
+	LoggerWithConfig.func1: c.Next()
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x843110)
+	(*Context).Next: c.handlers[c.index](c)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/gin.go:555 (0x842d78)
+	(*Engine).handleHTTPRequest: c.Next()
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/gin.go:511 (0x842a31)
+	(*Engine).ServeHTTP: engine.handleHTTPRequest(c)
+/home/fukaraca/sdk/go1.18/src/net/http/server.go:2916 (0x77385a)
+	serverHandler.ServeHTTP: handler.ServeHTTP(rw, req)
+/home/fukaraca/sdk/go1.18/src/net/http/server.go:1966 (0x770016)
+	(*conn).serve: serverHandler{c.server}.ServeHTTP(w, w.req)
+/home/fukaraca/sdk/go1.18/src/runtime/asm_amd64.s:1571 (0x464980)
+	goexit: BYTE	$0x90	// NOP
+[0m
+
+
+[31m2022/04/11 00:59:45 [Recovery] 2022/04/11 - 00:59:45 panic recovered:
+GET /user/wufiyu HTTP/1.1
+Host: localhost:8080
+Accept: */*
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+Cookie: session_token=10456126-baaf-4144-9e53-7c67c7ee0d56; uid=fukaraca
+Postman-Token: 8d4b0cb4-1224-453f-bbbb-286dc3c08c15
+User-Agent: PostmanRuntime/7.29.0
+X-Request-Id: ff57d098-bbe0-4cee-9633-33c34abe77da
+
+
+json: error calling MarshalJSON for type pgtype.Timestamptz: cannot encode status undefined
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/render/json.go:56 (0x83e75e)
+	JSON.Render: panic(err)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:927 (0x840977)
+	(*Context).Render: if err := r.Render(c.Writer); err != nil {
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:970 (0x85b144)
+	(*Context).JSON: c.Render(code, render.JSON{Data: obj})
+/home/fukaraca/go/src/github.com/fukaraca/worth2watch/api/handlers.go:196 (0x85b0ed)
+	GetUserInfo: c.JSON(http.StatusOK, user)
+/home/fukaraca/go/src/github.com/fukaraca/worth2watch/api/handlers.go:29 (0x8593ad)
+	Auth.func1: fn(c)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x852763)
+	(*Context).Next: c.handlers[c.index](c)
+/home/fukaraca/go/pkg/mod/github.com/gin-contrib/requestid@v0.0.3/requestid.go:42 (0x85274a)
+	New.func2: c.Next()
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x844f21)
+	(*Context).Next: c.handlers[c.index](c)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/recovery.go:99 (0x844f0c)
+	CustomRecoveryWithWriter.func1: c.Next()
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x844046)
+	(*Context).Next: c.handlers[c.index](c)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/logger.go:241 (0x844029)
+	LoggerWithConfig.func1: c.Next()
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x843110)
+	(*Context).Next: c.handlers[c.index](c)
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/gin.go:555 (0x842d78)
+	(*Engine).handleHTTPRequest: c.Next()
+/home/fukaraca/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/gin.go:511 (0x842a31)
+	(*Engine).ServeHTTP: engine.handleHTTPRequest(c)
+/home/fukaraca/sdk/go1.18/src/net/http/server.go:2916 (0x77385a)
+	serverHandler.ServeHTTP: handler.ServeHTTP(rw, req)
+/home/fukaraca/sdk/go1.18/src/net/http/server.go:1966 (0x770016)
+	(*conn).serve: serverHandler{c.server}.ServeHTTP(w, w.req)
+/home/fukaraca/sdk/go1.18/src/runtime/asm_amd64.s:1571 (0x464980)
+	goexit: BYTE	$0x90	// NOP
+[0m

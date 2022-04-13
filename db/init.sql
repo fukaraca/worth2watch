@@ -17,14 +17,14 @@ CREATE TABLE IF NOT EXISTS movies (
     description text,
     rating NUMERIC(3,1) check ( rating>=0 ),
     release_date timestamp,
-    director varchar(70) [],
-    writer varchar(70) [],
+    directors varchar(70) [],
+    writers varchar(70) [],
     stars varchar(70) [],
     duration_min int,
-    IMDB_id varchar(20),
+    imdb_id varchar(20),
     year int,
-    genre varchar(30),
-    audio varchar(20) [],
+    genres varchar(30) [],
+    audios varchar(20) [],
     subtitles varchar(20) []
 );
 CREATE TABLE IF NOT EXISTS series (
@@ -33,13 +33,13 @@ CREATE TABLE IF NOT EXISTS series (
     description text,
     rating NUMERIC(3,1) check ( rating>=0 ),
     release_date timestamp,
-    director varchar(70) [],
-    writer varchar(70) [],
+    directors varchar(70) [],
+    writers varchar(70) [],
     stars varchar(70) [],
     duration_min int,
-    IMDB_id varchar(20),
+    imdb_id varchar(20),
     year int,
-    genre varchar(30),
+    genres varchar(30) [],
     seasons int
 );
 CREATE TABLE IF NOT EXISTS seasons (
@@ -48,19 +48,20 @@ CREATE TABLE IF NOT EXISTS seasons (
     episodes int not null ,
     serie_id int references series(serie_id) not null
 );
+
 CREATE TABLE IF NOT EXISTS episodes (
     episode_id serial unique not null,
     title varchar(100),
     description text,
     rating NUMERIC(3,1) check ( rating>=0 ),
     release_date timestamp,
-    director varchar(70) [],
-    writer varchar(70) [],
+    directors varchar(70) [],
+    writers varchar(70) [],
     stars varchar(70) [],
     duration_min int,
-    IMDB_id varchar(20),
+    imdb_id varchar(20),
     year int,
-    audio varchar(20) [],
+    audios varchar(20) [],
     subtitles varchar(20) [],
     season_id int references seasons(season_id) not null
 );

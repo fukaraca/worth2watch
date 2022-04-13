@@ -27,7 +27,7 @@ func init() {
 	model.R = gin.Default()
 
 	//rate limiter
-	rLimit := ratelimit.New(1)
+	rLimit := ratelimit.New(20)
 	leakBucket := func(limiter ratelimit.Limiter) gin.HandlerFunc {
 		return func(ctx *gin.Context) {
 			limiter.Take()

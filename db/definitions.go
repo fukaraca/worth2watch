@@ -1,9 +1,9 @@
 package db
 
 import (
+	"github.com/fukaraca/worth2watch/config"
 	"github.com/go-redis/redis/v8"
 	"github.com/jackc/pgx/v4/pgxpool"
-	"time"
 )
 
 //in production, passing the variable to related function or wrapping in a struct is advised inspite of creating global variable like this. see:go.dev
@@ -11,14 +11,14 @@ import (
 var Conn *pgxpool.Pool
 var Cache *redis.Client
 var err error
-var TIMEOUT = 5 * time.Second
+var TIMEOUT = config.GetEnv.GetDuration("TIMEOUT")
 
-var db_Host = "127.0.0.1"
-var db_Port = "5432"
-var db_Name = "worth2watchdb"
-var db_User = "postgres"
-var db_Password = "postgres"
-var redis_Host = "localhost"
-var redis_Port = ":6379"
-var redis_Password = ""
-var redis_DB = 0
+var db_Host = config.GetEnv.GetString("DB_HOST")
+var db_Port = config.GetEnv.GetString("DB_PORT")
+var db_Name = config.GetEnv.GetString("DB_NAME")
+var db_User = config.GetEnv.GetString("DB_USER")
+var db_Password = config.GetEnv.GetString("DB_PASSWORD")
+var redis_Host = config.GetEnv.GetString("REDIS_HOST")
+var redis_Port = config.GetEnv.GetString("REDIS_PORT")
+var redis_Password = config.GetEnv.GetString("REDIS_PASSWORD")
+var redis_DB = config.GetEnv.GetInt("REDIS_DB")

@@ -1,17 +1,16 @@
 package model
 
 import (
+	"github.com/fukaraca/worth2watch/config"
 	"github.com/gin-gonic/gin"
 	"github.com/jackc/pgtype"
-	"time"
 )
 
 var R *gin.Engine
 
-//os.Getenv("key_string")
-var TIMEOUT = 5 * time.Second
-var ServerHost = "localhost"
-var ServerPort = ":8080"
+var TIMEOUT = config.GetEnv.GetDuration("TIMEOUT")
+var ServerHost = config.GetEnv.GetString("SERVER_HOST")
+var ServerPort = config.GetEnv.GetString("SERVER_PORT")
 
 type User struct {
 	UserID    int                `db.Conn:"user_id" json:"userID,omitempty"`
@@ -19,7 +18,7 @@ type User struct {
 	Password  string             `db.Conn:"password" json:"password"`
 	Email     pgtype.Text        `db.Conn:"email" json:"email"`
 	Name      pgtype.Text        `db.Conn:"name" json:"name"`
-	Lastname  pgtype.Text        `db.Conn:"name" json:"lastname"`
+	Lastname  pgtype.Text        `db.Conn:"lastname" json:"lastname"`
 	CreatedOn pgtype.Timestamptz `db.Conn:"createdon" json:"createdOn"`
 	LastLogin pgtype.Timestamptz `db.Conn:"lastlogin" json:"lastLogin"`
 	Isadmin   bool               `db.Conn:"isadmin" json:"isAdmin"`
@@ -31,14 +30,14 @@ type Movie struct {
 	Description pgtype.Text      `db.Conn:"description" json:"description"`
 	Rating      pgtype.Numeric   `db.Conn:"rating" json:"rating"`
 	ReleaseDate pgtype.Timestamp `db.Conn:"release_date" json:"releaseDate"`
-	Director    []pgtype.Text    `db.Conn:"director" json:"director,omitempty"`
-	Writer      []pgtype.Text    `db.Conn:"writer" json:"writer,omitempty"`
+	Directors   []pgtype.Text    `db.Conn:"directors" json:"director,omitempty"`
+	Writers     []pgtype.Text    `db.Conn:"writers" json:"writer,omitempty"`
 	Stars       []pgtype.Text    `db.Conn:"stars" json:"stars,omitempty"`
 	Duration    int              `db.Conn:"duration_min" json:"duration,omitempty"`
 	IMDBid      pgtype.Text      `db.Conn:"imdb_id" json:"IMDBid"`
 	Year        int              `db.Conn:"year" json:"year,omitempty"`
-	Genre       pgtype.Text      `db.Conn:"genre" json:"genre"`
-	Audio       []pgtype.Text    `db.Conn:"audio" json:"audio,omitempty"`
+	Genres      []pgtype.Text    `db.Conn:"genres" json:"genre,omitempty"`
+	Audio       []pgtype.Text    `db.Conn:"audios" json:"audio,omitempty"`
 	Subtitles   []pgtype.Text    `db.Conn:"subtitles" json:"subtitles,omitempty"`
 }
 
@@ -48,13 +47,13 @@ type Series struct {
 	Description pgtype.Text      `db.Conn:"description" json:"description"`
 	Rating      pgtype.Numeric   `db.Conn:"rating" json:"rating"`
 	ReleaseDate pgtype.Timestamp `db.Conn:"release_date" json:"releaseDate"`
-	Director    []pgtype.Text    `db.Conn:"director" json:"director,omitempty"`
-	Writer      []pgtype.Text    `db.Conn:"writer" json:"writer,omitempty"`
+	Directors   []pgtype.Text    `db.Conn:"directors" json:"director,omitempty"`
+	Writers     []pgtype.Text    `db.Conn:"writers" json:"writer,omitempty"`
 	Stars       []pgtype.Text    `db.Conn:"stars" json:"stars,omitempty"`
 	Duration    int              `db.Conn:"duration_min" json:"duration,omitempty"`
 	IMDBid      pgtype.Text      `db.Conn:"imdb_id" json:"IMDBid"`
 	Year        int              `db.Conn:"year" json:"year,omitempty"`
-	Genre       pgtype.Text      `db.Conn:"genre" json:"genre"`
+	Genres      []pgtype.Text    `db.Conn:"genres" json:"genre,omitempty"`
 	Seasons     int              `db.Conn:"seasons" json:"seasons"`
 }
 
@@ -71,13 +70,13 @@ type Episodes struct {
 	Description pgtype.Text      `db.Conn:"description" json:"description"`
 	Rating      pgtype.Numeric   `db.Conn:"rating" json:"rating"`
 	ReleaseDate pgtype.Timestamp `db.Conn:"release_date" json:"releaseDate"`
-	Director    []pgtype.Text    `db.Conn:"director" json:"director,omitempty"`
-	Writer      []pgtype.Text    `db.Conn:"writer" json:"writer,omitempty"`
+	Directors   []pgtype.Text    `db.Conn:"directors" json:"director,omitempty"`
+	Writers     []pgtype.Text    `db.Conn:"writers" json:"writer,omitempty"`
 	Stars       []pgtype.Text    `db.Conn:"stars" json:"stars,omitempty"`
 	Duration    int              `db.Conn:"duration_min" json:"duration,omitempty"`
 	IMDBid      pgtype.Text      `db.Conn:"imdb_id" json:"IMDBid"`
 	Year        int              `db.Conn:"year" json:"year,omitempty"`
-	Audio       []pgtype.Text    `db.Conn:"audio" json:"audio,omitempty"`
+	Audios      []pgtype.Text    `db.Conn:"audios" json:"audio,omitempty"`
 	Subtitles   []pgtype.Text    `db.Conn:"subtitles" json:"subtitles,omitempty"`
 	SeasonID    int              `db.Conn:"season_id" json:"seasonID"`
 }

@@ -23,7 +23,6 @@ func ConnectDB() {
 	if err != nil {
 		log.Fatalln("Ping to DB error:", err)
 	}
-
 }
 
 //CreateRedisClient function creates a Redis Client

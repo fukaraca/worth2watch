@@ -1,31 +1,5 @@
 package admin
 
-import "github.com/jackc/pgtype"
-
-type Seasons struct {
-	SeasonID     int `db.Conn:"season_id" json:"seasonID,omitempty"`
-	SeasonNumber int `db.Conn:"season_number" json:"seasonNumber,omitempty"`
-	Episodes     int `db.Conn:"episodes" json:"episodes,omitempty"`
-	SerieID      int `db.Conn:"serie_id" json:"serieID,omitempty" json:"serieID,omitempty"`
-}
-
-type Episodes struct {
-	EpisodeID   int              `db.Conn:"episode_id" json:"episodeID,omitempty"`
-	Title       pgtype.Text      `db.Conn:"title" json:"title"`
-	Description pgtype.Text      `db.Conn:"description" json:"description"`
-	Rating      pgtype.Numeric   `db.Conn:"rating" json:"rating"`
-	ReleaseDate pgtype.Timestamp `db.Conn:"release_date" json:"releaseDate"`
-	Directors   []pgtype.Text    `db.Conn:"director" json:"director,omitempty"`
-	Writers     []pgtype.Text    `db.Conn:"writer" json:"writer,omitempty"`
-	Stars       []pgtype.Text    `db.Conn:"stars" json:"stars,omitempty"`
-	Duration    int              `db.Conn:"duration_min" json:"duration,omitempty"`
-	IMDBid      pgtype.Text      `db.Conn:"imdb_id" json:"IMDBid"`
-	Year        int              `db.Conn:"year" json:"year,omitempty"`
-	Audios      []pgtype.Text    `db.Conn:"audio" json:"audio,omitempty"`
-	Subtitles   []pgtype.Text    `db.Conn:"subtitles" json:"subtitles,omitempty"`
-	SeasonID    int              `db.Conn:"season_id" json:"seasonID"`
-}
-
 type SeasonsAPI struct {
 	IDirrelevant string `json:"_id"`
 	AirDate      string `json:"air_date"`

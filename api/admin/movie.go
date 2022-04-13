@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/fukaraca/worth2watch/config"
-	"github.com/jackc/pgtype"
+	"github.com/fukaraca/worth2watch/model"
 	"io"
 	"log"
 	"net/http"
@@ -47,7 +47,7 @@ func FindIDWithIMDB(imdbID string) (int, error) {
 }
 
 //GetMovie returns Movie struct for given TMDB movie ID
-func GetMovie(id int) *Movie {
+func GetMovie(id int) *model.Movie {
 	getUrl := fmt.Sprintf("https://api.themoviedb.org/3/movie/%d?api_key=%s", id, API_KEY)
 	resp, err := http.Get(getUrl)
 	if err != nil {
@@ -70,12 +70,12 @@ func GetMovie(id int) *Movie {
 
 	//
 	//construct the movie struct
-	ret := Movie{}
+	ret := model.Movie{}
 
 	//title
-	ret.Title.String = movieFromAPI.Title
+	ret.Title = &movieFromAPI.Title
 	//description
-	ret.Description.String = movieFromAPI.Overview
+	ret.Description = &movieFromAPI.Overview
 	//release date
 	parsed, err := time.Parse("2006-01-02", movieFromAPI.ReleaseDate)
 	if err != nil {
@@ -89,7 +89,10 @@ func GetMovie(id int) *Movie {
 			}
 		}
 	}
-	ret.ReleaseDate.Time = parsed
+	err = ret.ReleaseDate.Set(parsed)
+	if err != nil {
+		log.Println("release date couldn't be set for pgtype", err)
+	}
 	//vote
 	if err = ret.Rating.Set(movieFromAPI.VoteAverage); err != nil {
 		log.Println("rating value couldn't be assigned for pgtype", err)
@@ -100,35 +103,31 @@ func GetMovie(id int) *Movie {
 		log.Println("cast and crew data for movie couldn't be gotten:", err)
 	} else {
 		//Directors
-		directors := castFromAPI.getDirectors("Directing")
+		directors := castFromAPI.getDirectors("Director")
 		for director := range directors {
-			directorToBeAppended := pgtype.Text{String: director}
-			ret.Directors = append(ret.Directors, directorToBeAppended)
+			ret.Directors = append(ret.Directors, director)
 		}
 		//Writers
-		writers := castFromAPI.getWriters("Writing")
+		writers := castFromAPI.getWriters("Writing", "Writer")
 		for writer := range writers {
-			writerToBeAppended := pgtype.Text{String: writer}
-			ret.Writers = append(ret.Writers, writerToBeAppended)
+			ret.Writers = append(ret.Writers, writer)
 		}
 		//Stars
 		stars := castFromAPI.getStars(5, 5)
 		for star := range stars {
-			starToBeAppended := pgtype.Text{String: star}
-			ret.Stars = append(ret.Stars, starToBeAppended)
+			ret.Stars = append(ret.Stars, star)
 		}
 	}
 
 	//Duration
 	ret.Duration = movieFromAPI.Runtime
 	//IMDB ID
-	ret.IMDBid.String = movieFromAPI.ImdbID
+	ret.IMDBid = &movieFromAPI.ImdbID
 	//Year
 	ret.Year = ret.ReleaseDate.Time.Year()
 	//Genre
 	for _, genre := range movieFromAPI.Genres {
-		toBeAppended := pgtype.Text{String: genre.Name}
-		ret.Genres = append(ret.Genres, toBeAppended)
+		ret.Genres = append(ret.Genres, genre.Name)
 	}
 	//Audio and subtitle
 	translationFromAPI, err := getTranslationDataOfMovie(id)
@@ -136,12 +135,12 @@ func GetMovie(id int) *Movie {
 		log.Println("translation data for movie couldn't be gotten:", err)
 	} else {
 		for _, translation := range translationFromAPI.Translations {
-			ret.Audio = append(ret.Audio, pgtype.Text{String: translation.EnglishName})
-			ret.Subtitles = append(ret.Subtitles, pgtype.Text{String: translation.EnglishName})
+			ret.Audios = append(ret.Audios, translation.EnglishName)
+			ret.Subtitles = append(ret.Subtitles, translation.EnglishName)
 		}
 	}
 
-	log.Println(ret.Title.String, " movie has been succesfully fetched")
+	log.Println(ret.Title, " movie has been succesfully fetched")
 	return &ret
 }
 
@@ -158,11 +157,11 @@ func (crew *CastAPI) getDirectors(jobTitle string) map[string]struct{} {
 }
 
 //getWriters is a helper func for GetMovie
-func (crew *CastAPI) getWriters(jobTitle string) map[string]struct{} {
+func (crew *CastAPI) getWriters(department, jobTitle string) map[string]struct{} {
 	ret := make(map[string]struct{})
 	var empty struct{}
 	for _, s := range crew.Crew {
-		if s.Department == jobTitle {
+		if s.Department == department || s.Job == jobTitle {
 			ret[s.Name] = empty
 		}
 	}

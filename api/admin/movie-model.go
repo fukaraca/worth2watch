@@ -1,7 +1,5 @@
 package admin
 
-import "github.com/jackc/pgtype"
-
 type MovieAPI struct {
 	Adult               bool   `json:"adult"`
 	BackdropPath        string `json:"backdrop_path"`
@@ -96,21 +94,4 @@ type TranslationAPI struct {
 			Title    string `json:"title"`
 		} `json:"data"`
 	} `json:"translations"`
-}
-
-type Movie struct {
-	MovieID     int              `db.Conn:"movie_id" json:"movieID,omitempty"`
-	Title       pgtype.Text      `db.Conn:"title" json:"title"`
-	Description pgtype.Text      `db.Conn:"description" json:"description"`
-	Rating      pgtype.Numeric   `db.Conn:"rating" json:"rating"`
-	ReleaseDate pgtype.Timestamp `db.Conn:"release_date" json:"releaseDate"`
-	Directors   []pgtype.Text    `db.Conn:"director" json:"director,omitempty"`
-	Writers     []pgtype.Text    `db.Conn:"writer" json:"writer,omitempty"`
-	Stars       []pgtype.Text    `db.Conn:"stars" json:"stars,omitempty"`
-	Duration    int              `db.Conn:"duration_min" json:"duration,omitempty"`
-	IMDBid      pgtype.Text      `db.Conn:"imdb_id" json:"IMDBid"`
-	Year        int              `db.Conn:"year" json:"year,omitempty"`
-	Genres      []pgtype.Text    `db.Conn:"genre" json:"genre"`
-	Audio       []pgtype.Text    `db.Conn:"audio" json:"audio,omitempty"`
-	Subtitles   []pgtype.Text    `db.Conn:"subtitles" json:"subtitles,omitempty"`
 }

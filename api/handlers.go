@@ -2,6 +2,7 @@ package api
 
 import (
 	"context"
+	"fmt"
 	"github.com/fukaraca/worth2watch/auth"
 	"github.com/fukaraca/worth2watch/db"
 	"github.com/fukaraca/worth2watch/model"
@@ -29,7 +30,7 @@ func Auth(fn gin.HandlerFunc) gin.HandlerFunc {
 	}
 }
 
-//CheckRegistration is for registeration of new user or admin.
+//CheckRegistration is a func for registering a new user or admin.
 //Data must be POSTed as "form data".
 //Leading or trailing whitespaces will be handled by frontend
 func CheckRegistration(c *gin.Context) {
@@ -48,15 +49,16 @@ func CheckRegistration(c *gin.Context) {
 		log.Println("new user info as JSON couldn't be binded:", err)
 		return
 	}
-	if newUser.Username == "" || newUser.Email.String == "" || newUser.Password == "" {
+	if newUser.Username == "" || *newUser.Email == "" || newUser.Password == "" {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"notification": "username or email or password cannot be empty",
 		})
 		log.Println("failed due to 'username or email or password cannot be empty':")
 		return
 	}
+
 	newUser.Username = *util.Striper(newUser.Username)
-	newUser.Email.String = *util.Striper(newUser.Email.String)
+	newUser.Email = util.Striper(*newUser.Email)
 	pass, err := util.HashPassword(*util.Striper(newUser.Password))
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
@@ -66,8 +68,8 @@ func CheckRegistration(c *gin.Context) {
 		return
 	}
 	newUser.Password = pass
-	newUser.CreatedOn.Time = time.Now()
-	newUser.LastLogin.Time = time.Now()
+	err = newUser.CreatedOn.Set(time.Now())
+	newUser.LastLogin.Set(time.Now())
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"notification": err.Error(),
@@ -75,15 +77,14 @@ func CheckRegistration(c *gin.Context) {
 		log.Println("new user info creation time couldn't be assigned:", err)
 		return
 	}
-	//insert new users if not exist
-	ctx, cancel := context.WithTimeout(c.Request.Context(), model.TIMEOUT)
-	defer cancel()
-	_, err = db.Conn.Exec(ctx, "INSERT INTO users (user_id,username,password,email,name,lastname,createdon,lastlogin,isadmin) VALUES (nextval('users_user_id_seq'),$1,$2,$3,$4,$5,$6,$7,$8);", newUser.Username, newUser.Password, newUser.Email, newUser.Name, newUser.Lastname, newUser.CreatedOn.Time, newUser.LastLogin.Time, newUser.Isadmin)
+
+	fmt.Println(newUser)
+	err = db.CreateNewUser(c, newUser)
 	if err != nil {
+		log.Println(err)
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"notification": err.Error(),
 		})
-		log.Println("user infos for register was failed to insert to DB:", err)
 		return
 	}
 
@@ -194,11 +195,140 @@ func GetUserInfo(c *gin.Context) {
 	c.JSON(http.StatusOK, user)
 }
 
-func Movies(c *gin.Context) {
+//AddContentByID is handler func for content adding by IMDB ID and contents type.
+//It requires "movie" or "series" for content-type key.
+//Insertion is being maintained asynchronously due to expensive amount of time that was required to be got all data related to series.
+func AddContentByID(c *gin.Context) {
+	username, _ := c.Cookie("uid")
+	if !auth.CheckAdminForLoggedIn(c, username) {
+		c.JSON(http.StatusUnauthorized, gin.H{
+			"notification": "unauthorized attempt",
+		})
+		log.Println("unauthorized attempt by user:", username)
+		return
+	}
+	IMDBID := c.PostForm("imdb-id")
+	contentType := c.PostForm("content-type")
+	switch contentType {
+	case "movie":
+		go db.AddMovieContentWithID(IMDBID)
 
+	case "series":
+		go db.AddSeriesContentWithID(IMDBID)
+
+	default:
+		log.Println("invalid content-type:", contentType)
+		c.JSON(http.StatusBadRequest, gin.H{
+			"notification": "invalid content-type: " + contentType,
+		})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"notification": "content will be inserted shortly after",
+	})
 }
 
-func AddMovie(c *gin.Context) {
+//AddContentWithJSON handles adding new content with JSON format.
+//Content-type "movie" or "series" must be provided.
+func AddContentWithJSON(c *gin.Context) {
+	username, _ := c.Cookie("uid")
+	if !auth.CheckAdminForLoggedIn(c, username) {
+		c.JSON(http.StatusUnauthorized, gin.H{
+			"notification": "unauthorized attempt",
+		})
+		log.Println("unauthorized attempt by user:", username)
+		return
+	}
+
+	contentType := c.Param("content-type")
+
+	switch contentType {
+	case "movie":
+		movie := new(model.Movie)
+		err := c.BindJSON(movie)
+		if err != nil {
+			log.Println("movie content couldn't be added: ", err)
+			c.JSON(http.StatusBadRequest, gin.H{
+				"notification": "movie content couldn't be added. error: " + err.Error(),
+			})
+			return
+		}
+		err = db.AddMovieContentWithStruct(c, movie)
+		if err != nil {
+			log.Println("movie content couldn't be added: ", err)
+			c.JSON(http.StatusInternalServerError, gin.H{
+				"notification": "movie content couldn't be added. error: " + err.Error(),
+			})
+			return
+		}
+	case "series":
+		series := new(model.Series)
+		err := c.BindJSON(series)
+		if err != nil {
+			log.Println("series content couldn't be added: ", err)
+			c.JSON(http.StatusBadRequest, gin.H{
+				"notification": "series content couldn't be added. error: " + err.Error(),
+			})
+			return
+		}
+		err = db.AddSeriesContentWithStruct(c, series)
+		if err != nil {
+			log.Println("series content couldn't be added: ", err)
+			c.JSON(http.StatusInternalServerError, gin.H{
+				"notification": "series content couldn't be added. error: " + err.Error(),
+			})
+			return
+		}
+	default:
+		log.Println("invalid content-type:", contentType)
+		c.JSON(http.StatusBadRequest, gin.H{
+			"notification": "invalid content-type: " + contentType,
+		})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"notification": "content has been created successfully",
+	})
+}
+
+//DeleteContentByID deletes content for given IMDB id. Content-type must be provided
+func DeleteContentByID(c *gin.Context) {
+	username, _ := c.Cookie("uid")
+	if !auth.CheckAdminForLoggedIn(c, username) {
+		c.JSON(http.StatusUnauthorized, gin.H{
+			"notification": "unauthorized attempt",
+		})
+		log.Println("unauthorized attempt by user:", username)
+		return
+	}
+	IMDBID := c.PostForm("imdb-id")
+	contentType := c.PostForm("content-type")
+
+	if !(contentType == "movie" || contentType == "series") {
+		log.Println("invalid content-type:", contentType)
+		c.JSON(http.StatusBadRequest, gin.H{
+			"notification": "invalid content-type: " + contentType,
+		})
+		return
+	}
+
+	err := db.DeleteContent(c, username, IMDBID, contentType)
+	if err != nil {
+		log.Println("content ", IMDBID, " couldn't be deleted: ", err)
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"notification": "content " + IMDBID + " couldn't be deleted. error: " + err.Error(),
+		})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"notification": "content has been deleted successfully",
+	})
+}
+
+func Movies(c *gin.Context) {
 
 }
 

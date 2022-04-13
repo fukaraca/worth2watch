@@ -3,7 +3,7 @@ package admin
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/jackc/pgtype"
+	"github.com/fukaraca/worth2watch/model"
 	"io"
 	"log"
 	"net/http"
@@ -13,8 +13,8 @@ import (
 )
 
 //GetSeason function constructs and returns the given season and its episodes
-func (series *Series) GetSeason(season int) (*Seasons, *[]Episodes) {
-	id, err := FindIDWithIMDB(series.IMDBid.String)
+func GetSeason(series *model.Series, season int) (*model.Seasons, []*model.Episodes) {
+	id, err := FindIDWithIMDB(*series.IMDBid)
 	if err != nil {
 		log.Println("serie id couldn't be gotten", err)
 		return nil, nil
@@ -40,18 +40,23 @@ func (series *Series) GetSeason(season int) (*Seasons, *[]Episodes) {
 	}
 
 	//construct seasons and episodes
-	var retSeason Seasons
-	var retEpisodes []Episodes
+	var retSeason model.Seasons
+	var retEpisodes []*model.Episodes
 	//seasons
 	retSeason.SeasonNumber = season
 	retSeason.Episodes = len(seasonsFromAPI.Episodes)
+	retSeason.IMDBid = series.IMDBid
 	//episodes
 	for i, ep := range seasonsFromAPI.Episodes {
-		temp := Episodes{}
+		temp := model.Episodes{}
 		//title
-		temp.Title.String = ep.Name
+		tempName := ep.Name
+		temp.Title = &tempName
+		//episode_number
+		temp.EpisodeNumber = ep.EpisodeNumber
 		//Description
-		temp.Description.String = ep.Overview
+		tempOver := ep.Overview
+		temp.Description = &tempOver
 		//Rating
 		if err = temp.Rating.Set(ep.VoteAverage); err != nil {
 			log.Println("rating value couldn't be assigned for pgtype", err)
@@ -69,24 +74,24 @@ func (series *Series) GetSeason(season int) (*Seasons, *[]Episodes) {
 				}
 			}
 		}
-		temp.ReleaseDate.Time = parsed
+		err = temp.ReleaseDate.Set(parsed)
+		if err != nil {
+			log.Println("release date couldn't be set for pgtype", err)
+		}
 		//Directors
 		directors := seasonsFromAPI.getDirectors(i, "Director")
 		for director := range directors {
-			directorToBeAppended := pgtype.Text{String: director}
-			temp.Directors = append(temp.Directors, directorToBeAppended)
+			temp.Directors = append(temp.Directors, director)
 		}
 		//Writers
 		writers := seasonsFromAPI.getWriters(i, "Writer")
 		for writer := range writers {
-			writerToBeAppended := pgtype.Text{String: writer}
-			temp.Writers = append(temp.Writers, writerToBeAppended)
+			temp.Writers = append(temp.Writers, writer)
 		}
 		//Stars
 		stars := seasonsFromAPI.getStars(id, season, ep.EpisodeNumber, 6, 5)
 		for star := range stars {
-			starToBeAppended := pgtype.Text{String: star}
-			temp.Stars = append(temp.Stars, starToBeAppended)
+			temp.Stars = append(temp.Stars, star)
 		}
 		//Duration
 		temp.Duration = series.Duration
@@ -94,7 +99,7 @@ func (series *Series) GetSeason(season int) (*Seasons, *[]Episodes) {
 		if imdb, err := findIMDBIDForEpisode(id, season, ep.EpisodeNumber); err != nil {
 			log.Println("imdb id for season ", ep.SeasonNumber, " episode ", ep.EpisodeNumber, " couldn't be get")
 		} else {
-			temp.IMDBid.String = imdb
+			temp.IMDBid = &imdb
 		}
 		//Year
 		temp.Year = temp.ReleaseDate.Time.Year()
@@ -103,14 +108,15 @@ func (series *Series) GetSeason(season int) (*Seasons, *[]Episodes) {
 			log.Println(err)
 		} else {
 			for _, translation := range tr.Translations {
-				temp.Audios = append(temp.Audios, pgtype.Text{String: translation.EnglishName})
-				temp.Subtitles = append(temp.Subtitles, pgtype.Text{String: translation.EnglishName})
+				temp.Audios = append(temp.Audios, translation.EnglishName)
+				temp.Subtitles = append(temp.Subtitles, translation.EnglishName)
 			}
 		}
-		retEpisodes = append(retEpisodes, temp)
-		log.Println(series.Title.String, " season ", season, " episode ", ep.EpisodeNumber, " has been fetched")
+		retEpisodes = append(retEpisodes, &temp)
+
 	}
-	return &retSeason, &retEpisodes
+	log.Println(*series.Title, " season ", season, " has been fetched")
+	return &retSeason, retEpisodes
 }
 
 //getDirectors is a helper func for GetSeason

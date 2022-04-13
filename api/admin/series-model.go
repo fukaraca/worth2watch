@@ -1,7 +1,5 @@
 package admin
 
-import "github.com/jackc/pgtype"
-
 type SeriesAPI struct {
 	Adult        bool   `json:"adult"`
 	BackdropPath string `json:"backdrop_path"`
@@ -118,20 +116,4 @@ type SeriesCastAPI struct {
 		TotalEpisodeCount int    `json:"total_episode_count"`
 	} `json:"crew"`
 	ID int `json:"id"`
-}
-
-type Series struct {
-	SerieID     int              `db.Conn:"serie_id" json:"serieID,omitempty"`
-	Title       pgtype.Text      `db.Conn:"title" json:"title"`
-	Description pgtype.Text      `db.Conn:"description" json:"description"`
-	Rating      pgtype.Numeric   `db.Conn:"rating" json:"rating"`
-	ReleaseDate pgtype.Timestamp `db.Conn:"release_date" json:"releaseDate"`
-	Directors   []pgtype.Text    `db.Conn:"director" json:"director,omitempty"`
-	Writers     []pgtype.Text    `db.Conn:"writer" json:"writer,omitempty"`
-	Stars       []pgtype.Text    `db.Conn:"stars" json:"stars,omitempty"`
-	Duration    int              `db.Conn:"duration_min" json:"duration,omitempty"`
-	IMDBid      pgtype.Text      `db.Conn:"imdb_id" json:"IMDBid"`
-	Year        int              `db.Conn:"year" json:"year,omitempty"`
-	Genres      []pgtype.Text    `db.Conn:"genre" json:"genre"`
-	Seasons     int              `db.Conn:"seasons" json:"seasons"`
 }

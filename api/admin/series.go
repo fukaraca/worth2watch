@@ -3,7 +3,7 @@ package admin
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/jackc/pgtype"
+	"github.com/fukaraca/worth2watch/model"
 	"io"
 	"log"
 	"net/http"
@@ -40,7 +40,7 @@ func findIMDBWithID(id int) (string, error) {
 	return before, nil
 }
 
-func GetSeries(id int) *Series {
+func GetSeries(id int) *model.Series {
 	getUrl := fmt.Sprintf("https://api.themoviedb.org/3/tv/%d?api_key=%s", id, API_KEY)
 	resp, err := http.Get(getUrl)
 	if err != nil {
@@ -83,11 +83,11 @@ func GetSeries(id int) *Series {
 	}
 
 	//construct the series struct
-	ret := Series{}
+	ret := model.Series{}
 	//Title
-	ret.Title.String = seriesFromAPI.Name
+	ret.Title = &seriesFromAPI.Name
 	//Description
-	ret.Description.String = seriesFromAPI.Overview
+	ret.Description = &seriesFromAPI.Overview
 	//Rating
 	if err = ret.Rating.Set(seriesFromAPI.VoteAverage); err != nil {
 		log.Println("rating value couldn't be assigned for pgtype", err)
@@ -105,24 +105,25 @@ func GetSeries(id int) *Series {
 			}
 		}
 	}
-	ret.ReleaseDate.Time = parsed
+	err = ret.ReleaseDate.Set(parsed)
+	if err != nil {
+		log.Println("release date couldn't be set for pgtype", err)
+	}
 	//Directors
 	directors := castFromAPI.getDirectors("Director")
 	for director := range directors {
-		directorToBeAppended := pgtype.Text{String: director}
-		ret.Directors = append(ret.Directors, directorToBeAppended)
+		ret.Directors = append(ret.Directors, director)
 	}
 	//Writers
 	writers := castFromAPI.getWriters("Writer")
 	for writer := range writers {
-		writerToBeAppended := pgtype.Text{String: writer}
-		ret.Writers = append(ret.Writers, writerToBeAppended)
+
+		ret.Writers = append(ret.Writers, writer)
 	}
 	//Stars
 	stars := castFromAPI.getStars(5, 6, seriesFromAPI.NumberOfEpisodes)
 	for star := range stars {
-		starToBeAppended := pgtype.Text{String: star}
-		ret.Stars = append(ret.Stars, starToBeAppended)
+		ret.Stars = append(ret.Stars, star)
 	}
 	//Duration
 	ret.Duration = seriesFromAPI.EpisodeRunTime[0]
@@ -131,14 +132,14 @@ func GetSeries(id int) *Series {
 	if imdb, err := findIMDBWithID(id); err != nil {
 		log.Println(err)
 	} else {
-		ret.IMDBid.String = imdb
+		ret.IMDBid = &imdb
 	}
 	//Year
 	ret.Year = ret.ReleaseDate.Time.Year()
 	//Genres
 	for _, genre := range seriesFromAPI.Genres {
-		toBeAppended := pgtype.Text{String: genre.Name}
-		ret.Genres = append(ret.Genres, toBeAppended)
+
+		ret.Genres = append(ret.Genres, genre.Name)
 	}
 	//seasons
 	ret.Seasons = seriesFromAPI.NumberOfSeasons

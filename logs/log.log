@@ -4024,3 +4024,67 @@ Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-
 [GIN] 2022/04/15 - 01:01:36 | 200 |     20.8794ms |             ::1 | POST     "/addFavorites"
 [GIN] 2022/04/15 - 01:01:41 | 200 |      8.4953ms |             ::1 | GET      "/searchFavorites?page=1&items=2&name=fa&genre=Drama"
 [GIN] 2022/04/15 - 01:01:53 | 200 |     11.4152ms |             ::1 | GET      "/searchFavorites?page=1&items=2&name=fa&genre=Thriller"
+[GIN] 2022/04/15 - 01:36:54 | 400 |      5.4011ms |             ::1 | POST     "/login"
+[GIN] 2022/04/15 - 01:37:09 | 500 |     82.0531ms |             ::1 | DELETE   "/deleteMovieByID"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /movies/:id               --> github.com/fukaraca/worth2watch/api.GetThisMovie (5 handlers)
+[GIN-debug] GET    /movies/list              --> github.com/fukaraca/worth2watch/api.GetMoviesWithPage (5 handlers)
+[GIN-debug] GET    /searchContent            --> github.com/fukaraca/worth2watch/api.SearchContent (5 handlers)
+[GIN-debug] GET    /series/:seriesid         --> github.com/fukaraca/worth2watch/api.GetThisSeries (5 handlers)
+[GIN-debug] GET    /series/list              --> github.com/fukaraca/worth2watch/api.GetSeriesWithPage (5 handlers)
+[GIN-debug] GET    /series/:seriesid/:season --> github.com/fukaraca/worth2watch/api.GetEpisodesForaSeason (5 handlers)
+[GIN-debug] GET    /getSimilarContent        --> github.com/fukaraca/worth2watch/api.GetSimilarContent (5 handlers)
+[GIN-debug] POST   /addFavorites             --> github.com/fukaraca/worth2watch/api.Auth.func1 (5 handlers)
+[GIN-debug] GET    /getFavorites             --> github.com/fukaraca/worth2watch/api.Auth.func1 (5 handlers)
+[GIN-debug] GET    /searchFavorites          --> github.com/fukaraca/worth2watch/api.Auth.func1 (5 handlers)
+[GIN-debug] POST   /addContentByID           --> github.com/fukaraca/worth2watch/api.Auth.func1 (5 handlers)
+[GIN-debug] POST   /addContentWithJSON       --> github.com/fukaraca/worth2watch/api.Auth.func1 (5 handlers)
+[GIN-debug] DELETE /deleteMovieByID          --> github.com/fukaraca/worth2watch/api.Auth.func1 (5 handlers)
+[GIN-debug] GET    /user/:username           --> github.com/fukaraca/worth2watch/api.Auth.func1 (5 handlers)
+[GIN-debug] POST   /register                 --> github.com/fukaraca/worth2watch/api.CheckRegistration (5 handlers)
+[GIN-debug] POST   /login                    --> github.com/fukaraca/worth2watch/api.Login (5 handlers)
+[GIN-debug] PATCH  /updateUser               --> github.com/fukaraca/worth2watch/api.Auth.func1 (5 handlers)
+[GIN-debug] POST   /logout                   --> github.com/fukaraca/worth2watch/api.Auth.func1 (5 handlers)
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN] 2022/04/15 - 01:49:30 | 400 |      2.1549ms |             ::1 | POST     "/login"
+[GIN] 2022/04/15 - 01:49:36 | 200 |     49.1693ms |             ::1 | DELETE   "/deleteMovieByID"
+[GIN] 2022/04/15 - 01:52:28 | 200 |     16.4589ms |             ::1 | DELETE   "/deleteMovieByID"
+[GIN] 2022/04/15 - 01:53:12 | 200 |     13.3437ms |             ::1 | DELETE   "/deleteMovieByID"
+[GIN] 2022/04/15 - 01:55:33 | 500 |     25.4334ms |             ::1 | DELETE   "/deleteMovieByID"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /movies/:id               --> github.com/fukaraca/worth2watch/api.GetThisMovie (5 handlers)
+[GIN-debug] GET    /movies/list              --> github.com/fukaraca/worth2watch/api.GetMoviesWithPage (5 handlers)
+[GIN-debug] GET    /searchContent            --> github.com/fukaraca/worth2watch/api.SearchContent (5 handlers)
+[GIN-debug] GET    /series/:seriesid         --> github.com/fukaraca/worth2watch/api.GetThisSeries (5 handlers)
+[GIN-debug] GET    /series/list              --> github.com/fukaraca/worth2watch/api.GetSeriesWithPage (5 handlers)
+[GIN-debug] GET    /series/:seriesid/:season --> github.com/fukaraca/worth2watch/api.GetEpisodesForaSeason (5 handlers)
+[GIN-debug] GET    /getSimilarContent        --> github.com/fukaraca/worth2watch/api.GetSimilarContent (5 handlers)
+[GIN-debug] POST   /addFavorites             --> github.com/fukaraca/worth2watch/api.Auth.func1 (5 handlers)
+[GIN-debug] GET    /getFavorites             --> github.com/fukaraca/worth2watch/api.Auth.func1 (5 handlers)
+[GIN-debug] GET    /searchFavorites          --> github.com/fukaraca/worth2watch/api.Auth.func1 (5 handlers)
+[GIN-debug] POST   /addContentByID           --> github.com/fukaraca/worth2watch/api.Auth.func1 (5 handlers)
+[GIN-debug] POST   /addContentWithJSON       --> github.com/fukaraca/worth2watch/api.Auth.func1 (5 handlers)
+[GIN-debug] DELETE /deleteMovieByID          --> github.com/fukaraca/worth2watch/api.Auth.func1 (5 handlers)
+[GIN-debug] GET    /user/:username           --> github.com/fukaraca/worth2watch/api.Auth.func1 (5 handlers)
+[GIN-debug] POST   /register                 --> github.com/fukaraca/worth2watch/api.CheckRegistration (5 handlers)
+[GIN-debug] POST   /login                    --> github.com/fukaraca/worth2watch/api.Login (5 handlers)
+[GIN-debug] PATCH  /updateUser               --> github.com/fukaraca/worth2watch/api.Auth.func1 (5 handlers)
+[GIN-debug] POST   /logout                   --> github.com/fukaraca/worth2watch/api.Auth.func1 (5 handlers)
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN] 2022/04/15 - 02:01:52 | 401 |      2.9007ms |             ::1 | DELETE   "/deleteMovieByID"
+[GIN] 2022/04/15 - 02:01:57 | 200 |     49.5675ms |             ::1 | POST     "/login"
+[GIN] 2022/04/15 - 02:02:01 | 200 |     56.8392ms |             ::1 | DELETE   "/deleteMovieByID"

@@ -321,7 +321,7 @@ func DeleteContentByID(c *gin.Context) {
 		return
 	}
 
-	err := db.DeleteContent(c, username, IMDBID, contentType)
+	err := db.DeleteContent(c, IMDBID, contentType)
 	if err != nil {
 		log.Println("content ", IMDBID, " couldn't be deleted: ", err)
 		c.JSON(http.StatusInternalServerError, gin.H{

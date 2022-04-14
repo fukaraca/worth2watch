@@ -119,19 +119,23 @@ func AddSeriesContentWithStruct(ctx context.Context, series *model.Series) error
 }
 
 //DeleteContent deletes given content from DB
-func DeleteContent(c *gin.Context, username, id, contentType string) error {
+func DeleteContent(c *gin.Context, id, contentType string) error {
 	ctx, cancel := context.WithTimeout(c.Request.Context(), TIMEOUT)
 	defer cancel()
 
 	switch contentType {
 	case "movie":
-		_, err := Conn.Exec(ctx, "DELETE FROM movies WHERE imdb_id=$1;", id)
-		//_, err := Conn.Exec(ctx, "DELETE FROM favorite_movies WHERE =$1;",id)
+		_, err := Conn.Exec(ctx, "DELETE FROM favorite_movies WHERE movie_id=(SELECT movie_id FROM movies WHERE imdb_id=$1);", id)
+		_, err = Conn.Exec(ctx, "DELETE FROM movies WHERE imdb_id=$1;", id)
 		if err != nil {
 			return err
 		}
 	case "series":
-		_, err := Conn.Exec(ctx, "DELETE FROM series WHERE imdb_id=$1;", id)
+		//
+		_, err := Conn.Exec(ctx, "DELETE FROM episodes WHERE season_id=(SELECT season_id FROM seasons WHERE imdb_id=$1);", id)
+		_, err = Conn.Exec(ctx, "DELETE FROM seasons WHERE serie_id=(SELECT serie_id FROM series WHERE imdb_id=$1);", id)
+		_, err = Conn.Exec(ctx, "DELETE FROM favorite_series WHERE serie_id=(SELECT serie_id FROM series WHERE imdb_id=$1);", id)
+		_, err = Conn.Exec(ctx, "DELETE FROM series WHERE imdb_id=$1;", id)
 		if err != nil {
 			return err
 		}

@@ -110,7 +110,7 @@ func CheckAdminForLoggedIn(c *gin.Context, username string) bool {
 	defer cancel()
 	cookieVal, err := db.Cache.Do(ctx, "GET", "admin-"+username).Result()
 	if err != nil {
-		log.Println("query cache for admin register failed:", err)
+		//log.Println("query cache for admin register failed:", err)
 		return false
 	}
 	if cookieVal.(string) == "1" {

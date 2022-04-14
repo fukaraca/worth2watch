@@ -58,9 +58,7 @@ func GetSeason(series *model.Series, season int) (*model.Seasons, []*model.Episo
 		tempOver := ep.Overview
 		temp.Description = &tempOver
 		//Rating
-		if err = temp.Rating.Set(ep.VoteAverage); err != nil {
-			log.Println("rating value couldn't be assigned for pgtype", err)
-		}
+		temp.Rating = ep.VoteAverage
 		//Release Date
 		parsed, err := time.Parse("2006-01-02", ep.AirDate)
 		if err != nil {

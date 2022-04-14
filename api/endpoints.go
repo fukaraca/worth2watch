@@ -7,11 +7,15 @@ import (
 func Endpoints() {
 	//todo    vvvv
 
-	model.R.GET("/movies", Movies)
-	model.R.GET("/series", Series)
-	model.R.GET("/seasons", Seasons)
-	model.R.GET("episodes", Episodes)
 	///todo  ^^^^
+	//public
+	model.R.GET("/movies/:id", GetThisMovie)
+	model.R.GET("/movies/list", GetMoviesWithPage)
+	model.R.GET("/searchContent", SearchContent)
+	model.R.GET("/series/:seriesid", GetThisSeries)
+	model.R.GET("/series/list", GetSeriesWithPage)
+	model.R.GET("/series/:seriesid/:season", GetEpisodesForaSeason)
+	model.R.GET("/getSimilarContent", GetSimilarContent)
 
 	//content management
 	model.R.POST("/addContentByID", Auth(AddContentByID))

@@ -53,7 +53,6 @@ CREATE TABLE IF NOT EXISTS seasons (
 CREATE TABLE IF NOT EXISTS episodes (
     episode_id serial unique not null,
     title varchar(100),
-    episode_number int not null ,
     description text,
     rating NUMERIC(3,1) check ( rating>=0 ),
     release_date date,
@@ -65,7 +64,8 @@ CREATE TABLE IF NOT EXISTS episodes (
     year int,
     audios varchar(20) [],
     subtitles varchar(20) [],
-    season_id int references seasons(season_id) on delete cascade
+    season_id int references seasons(season_id) on delete cascade,
+    episode_number int not null
 );
 CREATE TABLE IF NOT EXISTS favorite_movies (
     favorite_id serial unique not null,

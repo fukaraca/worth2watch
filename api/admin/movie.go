@@ -94,9 +94,7 @@ func GetMovie(id int) *model.Movie {
 		log.Println("release date couldn't be set for pgtype", err)
 	}
 	//vote
-	if err = ret.Rating.Set(movieFromAPI.VoteAverage); err != nil {
-		log.Println("rating value couldn't be assigned for pgtype", err)
-	}
+	ret.Rating = movieFromAPI.VoteAverage
 	//Cast and crew
 	castFromAPI, err := getCastForMovie(id)
 	if err != nil {

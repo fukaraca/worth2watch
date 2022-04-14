@@ -25,36 +25,36 @@ type User struct {
 }
 
 type Movie struct {
-	MovieID     int            `db.Conn:"movie_id" json:"movieID,omitempty"`
-	Title       *string        `db.Conn:"title" json:"title"`
-	Description *string        `db.Conn:"description" json:"description"`
-	Rating      pgtype.Numeric `db.Conn:"rating" json:"rating"`
-	ReleaseDate pgtype.Date    `db.Conn:"release_date" json:"releaseDate"`
-	Directors   []string       `db.Conn:"directors" json:"director,omitempty"`
-	Writers     []string       `db.Conn:"writers" json:"writer,omitempty"`
-	Stars       []string       `db.Conn:"stars" json:"stars,omitempty"`
-	Duration    int            `db.Conn:"duration_min" json:"duration,omitempty"`
-	IMDBid      *string        `db.Conn:"imdb_id" json:"IMDBid"`
-	Year        int            `db.Conn:"year" json:"year,omitempty"`
-	Genres      []string       `db.Conn:"genres" json:"genre,omitempty"`
-	Audios      []string       `db.Conn:"audios" json:"audio,omitempty"`
-	Subtitles   []string       `db.Conn:"subtitles" json:"subtitles,omitempty"`
+	MovieID     int         `db.Conn:"movie_id" json:"movieID,omitempty"`
+	Title       *string     `db.Conn:"title" json:"title"`
+	Description *string     `db.Conn:"description" json:"description"`
+	Rating      float64     `db.Conn:"rating" json:"rating"`
+	ReleaseDate pgtype.Date `db.Conn:"release_date" json:"releaseDate"`
+	Directors   []string    `db.Conn:"directors" json:"director,omitempty"`
+	Writers     []string    `db.Conn:"writers" json:"writer,omitempty"`
+	Stars       []string    `db.Conn:"stars" json:"stars,omitempty"`
+	Duration    int         `db.Conn:"duration_min" json:"duration,omitempty"`
+	IMDBid      *string     `db.Conn:"imdb_id" json:"IMDBid"`
+	Year        int         `db.Conn:"year" json:"year,omitempty"`
+	Genres      []string    `db.Conn:"genres" json:"genre,omitempty"`
+	Audios      []string    `db.Conn:"audios" json:"audio,omitempty"`
+	Subtitles   []string    `db.Conn:"subtitles" json:"subtitles,omitempty"`
 }
 
 type Series struct {
-	SerieID     int            `db.Conn:"serie_id" json:"serieID,omitempty"`
-	Title       *string        `db.Conn:"title" json:"title"`
-	Description *string        `db.Conn:"description" json:"description"`
-	Rating      pgtype.Numeric `db.Conn:"rating" json:"rating"`
-	ReleaseDate pgtype.Date    `db.Conn:"release_date" json:"releaseDate"`
-	Directors   []string       `db.Conn:"directors" json:"director,omitempty"`
-	Writers     []string       `db.Conn:"writers" json:"writer,omitempty"`
-	Stars       []string       `db.Conn:"stars" json:"stars,omitempty"`
-	Duration    int            `db.Conn:"duration_min" json:"duration,omitempty"`
-	IMDBid      *string        `db.Conn:"imdb_id" json:"IMDBid"`
-	Year        int            `db.Conn:"year" json:"year,omitempty"`
-	Genres      []string       `db.Conn:"genres" json:"genre,omitempty"`
-	Seasons     int            `db.Conn:"seasons" json:"seasons"`
+	SerieID     int         `db.Conn:"serie_id" json:"serieID,omitempty"`
+	Title       *string     `db.Conn:"title" json:"title"`
+	Description *string     `db.Conn:"description" json:"description"`
+	Rating      float64     `db.Conn:"rating" json:"rating"`
+	ReleaseDate pgtype.Date `db.Conn:"release_date" json:"releaseDate"`
+	Directors   []string    `db.Conn:"directors" json:"director,omitempty"`
+	Writers     []string    `db.Conn:"writers" json:"writer,omitempty"`
+	Stars       []string    `db.Conn:"stars" json:"stars,omitempty"`
+	Duration    int         `db.Conn:"duration_min" json:"duration,omitempty"`
+	IMDBid      *string     `db.Conn:"imdb_id" json:"IMDBid"`
+	Year        int         `db.Conn:"year" json:"year,omitempty"`
+	Genres      []string    `db.Conn:"genres" json:"genre,omitempty"`
+	Seasons     int         `db.Conn:"seasons" json:"seasons"`
 }
 
 type Seasons struct {
@@ -66,19 +66,19 @@ type Seasons struct {
 }
 
 type Episodes struct {
-	EpisodeID     int            `db.Conn:"episode_id" json:"episodeID,omitempty"`
-	EpisodeNumber int            `db.Conn:"episode_number" json:"episodeNumber,omitempty"`
-	Title         *string        `db.Conn:"title" json:"title"`
-	Description   *string        `db.Conn:"description" json:"description"`
-	Rating        pgtype.Numeric `db.Conn:"rating" json:"rating"`
-	ReleaseDate   pgtype.Date    `db.Conn:"release_date" json:"releaseDate"`
-	Directors     []string       `db.Conn:"directors" json:"director,omitempty"`
-	Writers       []string       `db.Conn:"writers" json:"writer,omitempty"`
-	Stars         []string       `db.Conn:"stars" json:"stars,omitempty"`
-	Duration      int            `db.Conn:"duration_min" json:"duration,omitempty"`
-	IMDBid        *string        `db.Conn:"imdb_id" json:"IMDBid"`
-	Year          int            `db.Conn:"year" json:"year,omitempty"`
-	Audios        []string       `db.Conn:"audios" json:"audio,omitempty"`
-	Subtitles     []string       `db.Conn:"subtitles" json:"subtitles,omitempty"`
-	SeasonID      int            `db.Conn:"season_id" json:"seasonID"`
+	EpisodeID     int         `db.Conn:"episode_id" json:"episodeID,omitempty"`
+	Title         *string     `db.Conn:"title" json:"title"`
+	Description   *string     `db.Conn:"description" json:"description"`
+	Rating        float64     `db.Conn:"rating" json:"rating"`
+	ReleaseDate   pgtype.Date `db.Conn:"release_date" json:"releaseDate"`
+	Directors     []string    `db.Conn:"directors" json:"director,omitempty"`
+	Writers       []string    `db.Conn:"writers" json:"writer,omitempty"`
+	Stars         []string    `db.Conn:"stars" json:"stars,omitempty"`
+	Duration      int         `db.Conn:"duration_min" json:"duration,omitempty"`
+	IMDBid        *string     `db.Conn:"imdb_id" json:"IMDBid"`
+	Year          int         `db.Conn:"year" json:"year,omitempty"`
+	Audios        []string    `db.Conn:"audios" json:"audio,omitempty"`
+	Subtitles     []string    `db.Conn:"subtitles" json:"subtitles,omitempty"`
+	SeasonID      int         `db.Conn:"season_id" json:"seasonID"`
+	EpisodeNumber int         `db.Conn:"episode_number" json:"episodeNumber,omitempty"`
 }

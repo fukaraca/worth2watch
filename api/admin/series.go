@@ -89,9 +89,7 @@ func GetSeries(id int) *model.Series {
 	//Description
 	ret.Description = &seriesFromAPI.Overview
 	//Rating
-	if err = ret.Rating.Set(seriesFromAPI.VoteAverage); err != nil {
-		log.Println("rating value couldn't be assigned for pgtype", err)
-	}
+	ret.Rating = seriesFromAPI.VoteAverage
 	//Released Date
 	parsed, err := time.Parse("2006-01-02", seriesFromAPI.FirstAirDate)
 	if err != nil {

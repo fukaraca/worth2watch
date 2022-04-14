@@ -2,15 +2,17 @@ package api
 
 import (
 	"context"
-	"fmt"
+	"encoding/json"
 	"github.com/fukaraca/worth2watch/auth"
 	"github.com/fukaraca/worth2watch/db"
 	"github.com/fukaraca/worth2watch/model"
 	"github.com/fukaraca/worth2watch/util"
 	"github.com/gin-contrib/requestid"
 	"github.com/gin-gonic/gin"
+	"github.com/jackc/pgx/v4"
 	"log"
 	"net/http"
+	"strconv"
 	"time"
 )
 
@@ -78,7 +80,6 @@ func CheckRegistration(c *gin.Context) {
 		return
 	}
 
-	fmt.Println(newUser)
 	err = db.CreateNewUser(c, newUser)
 	if err != nil {
 		log.Println(err)
@@ -223,7 +224,6 @@ func AddContentByID(c *gin.Context) {
 		})
 		return
 	}
-
 	c.JSON(http.StatusOK, gin.H{
 		"notification": "content will be inserted shortly after",
 	})
@@ -231,6 +231,8 @@ func AddContentByID(c *gin.Context) {
 
 //AddContentWithJSON handles adding new content with JSON format.
 //Content-type "movie" or "series" must be provided.
+//This is not practical at all.
+//However, for an internal movie database that includes content that is not contained in IMDB, it can be useful with an additional struct field exposes e.g. BetterIMDB_ID..
 func AddContentWithJSON(c *gin.Context) {
 	username, _ := c.Cookie("uid")
 	if !auth.CheckAdminForLoggedIn(c, username) {
@@ -240,13 +242,18 @@ func AddContentWithJSON(c *gin.Context) {
 		log.Println("unauthorized attempt by user:", username)
 		return
 	}
+	/*	inputJSON := struct {
+		ContentType string `json:"content-type"`
+		RawData     *model.Movie `json:"content-raw-data"`
+	}{}*/
 
-	contentType := c.Param("content-type")
+	contentType := c.PostForm("content-type")
+	inputJSON := c.PostForm("content-raw-data")
 
 	switch contentType {
 	case "movie":
 		movie := new(model.Movie)
-		err := c.BindJSON(movie)
+		err := json.Unmarshal([]byte(inputJSON), movie)
 		if err != nil {
 			log.Println("movie content couldn't be added: ", err)
 			c.JSON(http.StatusBadRequest, gin.H{
@@ -264,7 +271,7 @@ func AddContentWithJSON(c *gin.Context) {
 		}
 	case "series":
 		series := new(model.Series)
-		err := c.BindJSON(series)
+		err := json.Unmarshal([]byte(inputJSON), series)
 		if err != nil {
 			log.Println("series content couldn't be added: ", err)
 			c.JSON(http.StatusBadRequest, gin.H{
@@ -328,18 +335,263 @@ func DeleteContentByID(c *gin.Context) {
 	})
 }
 
-func Movies(c *gin.Context) {
+//GetThisMovie is a handler function for responsing a specific movie details
+func GetThisMovie(c *gin.Context) {
+	id := c.Param("id")
+	movie, err := db.GetThisMovieFromDB(c, id)
+	if err != nil {
+		if err == pgx.ErrNoRows {
+			c.JSON(http.StatusNotFound, gin.H{
+				"notification": "no such movie",
+			})
+			return
+		} else {
+			log.Println("get this movie failed for id: ", id, " err: ", err)
+			c.JSON(http.StatusInternalServerError, gin.H{
+				"notification": err,
+			})
+			return
+		}
+	}
+
+	c.JSON(http.StatusOK, movie)
+}
+
+//GetThisSeries is a handler function for responsing a specific serie with its seasons
+func GetThisSeries(c *gin.Context) {
+	id := c.Param("seriesid")
+	series, seasons, err := db.GetThisSeriesFromDB(c, id)
+	if err != nil {
+		if err == pgx.ErrNoRows {
+			c.JSON(http.StatusNotFound, gin.H{
+				"notification": "no such serie",
+			})
+			return
+		} else if err.Error() == "there is no season for given series" {
+			c.JSON(http.StatusOK, gin.H{
+				"series":       series,
+				"notification": err.Error(),
+			})
+		} else {
+			log.Println("get this movie failed for id: ", id, " err: ", err)
+			c.JSON(http.StatusInternalServerError, gin.H{
+				"notification": err,
+			})
+			return
+		}
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"series":  series,
+		"seasons": seasons,
+	})
+}
+
+//GetEpisodesForaSeason is a handle function for responsing episodes for a certain season of a series
+func GetEpisodesForaSeason(c *gin.Context) {
+	seriesid := c.Param("seriesid")
+	seasonNumber := c.Param("season")
+
+	season, err := db.GetEpisodesForaSeasonFromDB(c, seriesid, seasonNumber)
+	if err != nil {
+		if err == pgx.ErrNoRows {
+			c.JSON(http.StatusNotFound, gin.H{
+				"notification": "no such season",
+			})
+			return
+		} else {
+			log.Println("get this season failed for serie: ", seriesid, " season:", seasonNumber, " err: ", err)
+			c.JSON(http.StatusInternalServerError, gin.H{
+				"notification": err,
+			})
+			return
+		}
+	}
+
+	c.JSON(http.StatusOK, season)
+}
+
+//GetMoviesWithPage handles request for given amount of item and page
+func GetMoviesWithPage(c *gin.Context) {
+	var err error
+	q := c.Request.URL.Query()
+	page := 1
+	items := 10
+
+	if q.Has("page") {
+		page, err = strconv.Atoi(q.Get("page"))
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{
+				"notification": "invalid page format",
+			})
+			return
+		}
+	}
+	if q.Has("items") {
+		items, err = strconv.Atoi(q.Get("items"))
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{
+				"notification": "invalid items format",
+			})
+			return
+		}
+	}
+
+	movies, err := db.GetMoviesListWithPage(c, page, items)
+	if err != nil {
+		if err == pgx.ErrNoRows {
+			c.JSON(http.StatusOK, gin.H{
+				"notification": "end of the list",
+			})
+			return
+		} else {
+			log.Println(err)
+			c.JSON(http.StatusInternalServerError, gin.H{
+				"notification": err,
+			})
+			return
+		}
+	}
+	c.JSON(http.StatusOK, movies)
 
 }
 
-func Series(c *gin.Context) {
+//GetSeriesWithPage handles request for given amount of item and page
+func GetSeriesWithPage(c *gin.Context) {
+	var err error
+	q := c.Request.URL.Query()
+	page := 1
+	items := 10
+
+	if q.Has("page") {
+		page, err = strconv.Atoi(q.Get("page"))
+		if err != nil || page < 1 {
+			c.JSON(http.StatusBadRequest, gin.H{
+				"notification": "invalid page format",
+			})
+			return
+		}
+	}
+	if q.Has("items") {
+		items, err = strconv.Atoi(q.Get("items"))
+		if err != nil || items < 1 {
+			c.JSON(http.StatusBadRequest, gin.H{
+				"notification": "invalid items format",
+			})
+			return
+		}
+	}
+
+	series, err := db.GetSeriesListWithPage(c, page, items)
+	if err != nil {
+		if err == pgx.ErrNoRows {
+			c.JSON(http.StatusOK, gin.H{
+				"notification": "end of the list",
+			})
+			return
+		} else {
+			log.Println(err)
+			c.JSON(http.StatusInternalServerError, gin.H{
+				"notification": err,
+			})
+			return
+		}
+	}
+	c.JSON(http.StatusOK, series)
 
 }
 
-func Seasons(c *gin.Context) {
+//SearchContent is handler function for searching movies/series by name and genres.
+//Page and item amount for movie or series on a page must be provided
+func SearchContent(c *gin.Context) {
+	var err error
+	q := c.Request.URL.Query()
+	name := ""
+	if q.Has("name") {
+		if len(q["name"]) > 1 {
+			c.JSON(http.StatusBadRequest, gin.H{
+				"notification": "online one name can be accepted",
+			})
+			return
+		}
+		name = q.Get("name")
+	}
+	genres := []string{}
+	if q.Has("genre") {
 
+		genres = q["genre"]
+	}
+	page := 1
+	items := 10
+
+	if q.Has("page") {
+		page, err = strconv.Atoi(q.Get("page"))
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{
+				"notification": "invalid page format",
+			})
+			return
+		}
+	}
+	if q.Has("items") {
+		items, err = strconv.Atoi(q.Get("items"))
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{
+				"notification": "invalid items format",
+			})
+			return
+		}
+	}
+
+	movies, series, err := db.SearchContent(c, name, genres, page, items)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"notification": "en error occurred",
+		})
+		return
+	}
+	if movies == nil && series == nil {
+		c.JSON(http.StatusOK, gin.H{
+			"notification": "no content found for given filter",
+		})
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{
+		"movies": movies,
+		"series": series,
+	})
 }
 
-func Episodes(c *gin.Context) {
+//GetSimilarContent handles for similar content request. Similarity evaluation is made by genre tags and sorted descending of rating
+func GetSimilarContent(c *gin.Context) {
+	IMDBID := c.PostForm("imdb-id")
+	contentType := c.PostForm("content-type")
 
+	if !(contentType == "movie" || contentType == "series") {
+		log.Println("invalid content-type:", contentType)
+		c.JSON(http.StatusBadRequest, gin.H{
+			"notification": "invalid content-type: " + contentType,
+		})
+		return
+	}
+	movies, series, err := db.FindSimilarContent(c, IMDBID, contentType)
+	if err != nil {
+		if err == pgx.ErrNoRows {
+			c.JSON(http.StatusOK, gin.H{
+				"notification": "no match of content",
+			})
+			return
+		} else {
+			log.Println(err)
+			c.JSON(http.StatusInternalServerError, gin.H{
+				"notification": err,
+			})
+			return
+		}
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"movies": movies,
+		"series": series,
+	})
 }

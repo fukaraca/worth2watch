@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS movies (
     writers varchar(70) [],
     stars varchar(70) [],
     duration_min int,
-    imdb_id varchar(20) unique ,
+    imdb_id varchar(20) ,
     year int,
     genres varchar(30) [],
     audios varchar(20) [],
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS series (
     writers varchar(70) [],
     stars varchar(70) [],
     duration_min int,
-    imdb_id varchar(20) unique ,
+    imdb_id varchar(20) ,
     year int,
     genres varchar(30) [],
     seasons int
@@ -70,10 +70,10 @@ CREATE TABLE IF NOT EXISTS episodes (
 CREATE TABLE IF NOT EXISTS favorite_movies (
     favorite_id serial unique not null,
     user_id int references users(user_id) on delete cascade ,
-    movie_id int references movies(movie_id)
+    movie_id int references movies(movie_id) on delete cascade
 );
 CREATE TABLE IF NOT EXISTS favorite_series (
     favorite_id serial unique not null ,
     user_id int references users(user_id) on delete cascade ,
-    serie_id int references series(serie_id)
+    serie_id int references series(serie_id) on delete cascade
 );

@@ -5,9 +5,7 @@ import (
 )
 
 func Endpoints() {
-	//todo    vvvv
 
-	///todo  ^^^^
 	//public
 	model.R.GET("/movies/:id", GetThisMovie)
 	model.R.GET("/movies/list", GetMoviesWithPage)
@@ -16,7 +14,10 @@ func Endpoints() {
 	model.R.GET("/series/list", GetSeriesWithPage)
 	model.R.GET("/series/:seriesid/:season", GetEpisodesForaSeason)
 	model.R.GET("/getSimilarContent", GetSimilarContent)
-
+	//user accessed
+	model.R.POST("/addFavorites", Auth(AddToFavorites))
+	model.R.GET("/getFavorites", Auth(GetFavorites))
+	model.R.GET("/searchFavorites", Auth(SearchFavorites))
 	//content management
 	model.R.POST("/addContentByID", Auth(AddContentByID))
 	model.R.POST("/addContentWithJSON", Auth(AddContentWithJSON))

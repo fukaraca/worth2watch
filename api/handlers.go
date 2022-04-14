@@ -510,7 +510,7 @@ func SearchContent(c *gin.Context) {
 	if q.Has("name") {
 		if len(q["name"]) > 1 {
 			c.JSON(http.StatusBadRequest, gin.H{
-				"notification": "online one name can be accepted",
+				"notification": "only one name can be accepted",
 			})
 			return
 		}
@@ -590,6 +590,136 @@ func GetSimilarContent(c *gin.Context) {
 		}
 	}
 
+	c.JSON(http.StatusOK, gin.H{
+		"movies": movies,
+		"series": series,
+	})
+}
+
+//AddToFavorites adds content to users favorites.
+func AddToFavorites(c *gin.Context) {
+	id := c.PostForm("imdb-id")
+	contentType := c.PostForm("content-type")
+
+	if !(contentType == "movie" || contentType == "series") {
+		log.Println("invalid content-type:", contentType)
+		c.JSON(http.StatusBadRequest, gin.H{
+			"notification": "invalid content-type: " + contentType,
+		})
+		return
+	}
+	err := db.AddContentToFavorites(c, id, contentType)
+	if err != nil {
+		log.Println("content add failed: ", err)
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"notification": err,
+		})
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{
+		"notification": "content has been added successfully",
+	})
+}
+
+//GetFavorites ...
+func GetFavorites(c *gin.Context) {
+	var err error
+	q := c.Request.URL.Query()
+	page := 1
+	items := 10
+
+	if q.Has("page") {
+		page, err = strconv.Atoi(q.Get("page"))
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{
+				"notification": "invalid page format",
+			})
+			return
+		}
+	}
+	if q.Has("items") {
+		items, err = strconv.Atoi(q.Get("items"))
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{
+				"notification": "invalid items format",
+			})
+			return
+		}
+	}
+
+	movies, series, err := db.GetFavoriteContents(c, page, items)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"notification": "en error occurred",
+		})
+		return
+	}
+	if movies == nil && series == nil {
+		c.JSON(http.StatusOK, gin.H{
+			"notification": "there is no favorite item",
+		})
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{
+		"movies": movies,
+		"series": series,
+	})
+}
+
+//SearchFavorites is handler function for searching on favorites
+func SearchFavorites(c *gin.Context) {
+	var err error
+	q := c.Request.URL.Query()
+	name := ""
+	if q.Has("name") {
+		if len(q["name"]) > 1 {
+			c.JSON(http.StatusBadRequest, gin.H{
+				"notification": "only one name can be accepted",
+			})
+			return
+		}
+		name = q.Get("name")
+	}
+	genres := []string{}
+	if q.Has("genre") {
+
+		genres = q["genre"]
+	}
+	page := 1
+	items := 10
+
+	if q.Has("page") {
+		page, err = strconv.Atoi(q.Get("page"))
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{
+				"notification": "invalid page format",
+			})
+			return
+		}
+	}
+	if q.Has("items") {
+		items, err = strconv.Atoi(q.Get("items"))
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{
+				"notification": "invalid items format",
+			})
+			return
+		}
+	}
+
+	movies, series, err := db.SearchFavorites(c, name, genres, page, items)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"notification": "en error occurred",
+		})
+		return
+	}
+	if movies == nil && series == nil {
+		c.JSON(http.StatusOK, gin.H{
+			"notification": "no content found for given filter",
+		})
+		return
+	}
 	c.JSON(http.StatusOK, gin.H{
 		"movies": movies,
 		"series": series,

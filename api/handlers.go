@@ -564,8 +564,21 @@ func SearchContent(c *gin.Context) {
 
 //GetSimilarContent handles for similar content request. Similarity evaluation is made by genre tags and sorted descending of rating
 func GetSimilarContent(c *gin.Context) {
-	IMDBID := c.PostForm("imdb-id")
-	contentType := c.PostForm("content-type")
+	IMDBID := ""
+	contentType := ""
+	var err error
+	q := c.Request.URL.Query()
+
+	if q.Has("imdb-id") && q.Has("content-type") {
+		IMDBID = q.Get("imdb-id")
+		contentType = q.Get("content-type")
+
+	} else {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"notification": "invalid imdb-id and content-type format",
+		})
+		return
+	}
 
 	if !(contentType == "movie" || contentType == "series") {
 		log.Println("invalid content-type:", contentType)

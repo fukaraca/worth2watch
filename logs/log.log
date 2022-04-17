@@ -4088,3 +4088,154 @@ Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-
 [GIN] 2022/04/15 - 02:01:52 | 401 |      2.9007ms |             ::1 | DELETE   "/deleteMovieByID"
 [GIN] 2022/04/15 - 02:01:57 | 200 |     49.5675ms |             ::1 | POST     "/login"
 [GIN] 2022/04/15 - 02:02:01 | 200 |     56.8392ms |             ::1 | DELETE   "/deleteMovieByID"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /movies/:id               --> github.com/fukaraca/worth2watch/api.GetThisMovie (5 handlers)
+[GIN-debug] GET    /movies/list              --> github.com/fukaraca/worth2watch/api.GetMoviesWithPage (5 handlers)
+[GIN-debug] GET    /searchContent            --> github.com/fukaraca/worth2watch/api.SearchContent (5 handlers)
+[GIN-debug] GET    /series/:seriesid         --> github.com/fukaraca/worth2watch/api.GetThisSeries (5 handlers)
+[GIN-debug] GET    /series/list              --> github.com/fukaraca/worth2watch/api.GetSeriesWithPage (5 handlers)
+[GIN-debug] GET    /series/:seriesid/:season --> github.com/fukaraca/worth2watch/api.GetEpisodesForaSeason (5 handlers)
+[GIN-debug] GET    /getSimilarContent        --> github.com/fukaraca/worth2watch/api.GetSimilarContent (5 handlers)
+[GIN-debug] POST   /addFavorites             --> github.com/fukaraca/worth2watch/api.Auth.func1 (5 handlers)
+[GIN-debug] GET    /getFavorites             --> github.com/fukaraca/worth2watch/api.Auth.func1 (5 handlers)
+[GIN-debug] GET    /searchFavorites          --> github.com/fukaraca/worth2watch/api.Auth.func1 (5 handlers)
+[GIN-debug] POST   /addContentByID           --> github.com/fukaraca/worth2watch/api.Auth.func1 (5 handlers)
+[GIN-debug] POST   /addContentWithJSON       --> github.com/fukaraca/worth2watch/api.Auth.func1 (5 handlers)
+[GIN-debug] DELETE /deleteMovieByID          --> github.com/fukaraca/worth2watch/api.Auth.func1 (5 handlers)
+[GIN-debug] GET    /user/:username           --> github.com/fukaraca/worth2watch/api.Auth.func1 (5 handlers)
+[GIN-debug] POST   /register                 --> github.com/fukaraca/worth2watch/api.CheckRegistration (5 handlers)
+[GIN-debug] POST   /login                    --> github.com/fukaraca/worth2watch/api.Login (5 handlers)
+[GIN-debug] PATCH  /updateUser               --> github.com/fukaraca/worth2watch/api.Auth.func1 (5 handlers)
+[GIN-debug] POST   /logout                   --> github.com/fukaraca/worth2watch/api.Auth.func1 (5 handlers)
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN] 2022/04/17 - 13:48:36 | 200 |     29.2791ms |             ::1 | GET      "/getSimilarContent"
+[GIN] 2022/04/17 - 13:52:19 | 400 |      2.6422ms |             ::1 | GET      "/getSimilarContent"
+[GIN] 2022/04/17 - 13:52:19 | 404 |            0s |             ::1 | GET      "/favicon.ico"
+[GIN] 2022/04/17 - 13:53:28 | 400 |       230.3µs |             ::1 | GET      "/getSimilarContent?imdb-id=tt0120737&content-type=movies"
+[GIN] 2022/04/17 - 13:53:33 | 400 |       805.6µs |             ::1 | GET      "/getSimilarContent?imdb-id=tt0120737&content-type=movie"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /movies/:id               --> github.com/fukaraca/worth2watch/api.GetThisMovie (5 handlers)
+[GIN-debug] GET    /movies/list              --> github.com/fukaraca/worth2watch/api.GetMoviesWithPage (5 handlers)
+[GIN-debug] GET    /searchContent            --> github.com/fukaraca/worth2watch/api.SearchContent (5 handlers)
+[GIN-debug] GET    /series/:seriesid         --> github.com/fukaraca/worth2watch/api.GetThisSeries (5 handlers)
+[GIN-debug] GET    /series/list              --> github.com/fukaraca/worth2watch/api.GetSeriesWithPage (5 handlers)
+[GIN-debug] GET    /series/:seriesid/:season --> github.com/fukaraca/worth2watch/api.GetEpisodesForaSeason (5 handlers)
+[GIN-debug] GET    /getSimilarContent        --> github.com/fukaraca/worth2watch/api.GetSimilarContent (5 handlers)
+[GIN-debug] POST   /addFavorites             --> github.com/fukaraca/worth2watch/api.Auth.func1 (5 handlers)
+[GIN-debug] GET    /getFavorites             --> github.com/fukaraca/worth2watch/api.Auth.func1 (5 handlers)
+[GIN-debug] GET    /searchFavorites          --> github.com/fukaraca/worth2watch/api.Auth.func1 (5 handlers)
+[GIN-debug] POST   /addContentByID           --> github.com/fukaraca/worth2watch/api.Auth.func1 (5 handlers)
+[GIN-debug] POST   /addContentWithJSON       --> github.com/fukaraca/worth2watch/api.Auth.func1 (5 handlers)
+[GIN-debug] DELETE /deleteMovieByID          --> github.com/fukaraca/worth2watch/api.Auth.func1 (5 handlers)
+[GIN-debug] GET    /user/:username           --> github.com/fukaraca/worth2watch/api.Auth.func1 (5 handlers)
+[GIN-debug] POST   /register                 --> github.com/fukaraca/worth2watch/api.CheckRegistration (5 handlers)
+[GIN-debug] POST   /login                    --> github.com/fukaraca/worth2watch/api.Login (5 handlers)
+[GIN-debug] PATCH  /updateUser               --> github.com/fukaraca/worth2watch/api.Auth.func1 (5 handlers)
+[GIN-debug] POST   /logout                   --> github.com/fukaraca/worth2watch/api.Auth.func1 (5 handlers)
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN] 2022/04/17 - 13:56:40 | 400 |      1.5617ms |             ::1 | GET      "/getSimilarContent"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /movies/:id               --> github.com/fukaraca/worth2watch/api.GetThisMovie (5 handlers)
+[GIN-debug] GET    /movies/list              --> github.com/fukaraca/worth2watch/api.GetMoviesWithPage (5 handlers)
+[GIN-debug] GET    /searchContent            --> github.com/fukaraca/worth2watch/api.SearchContent (5 handlers)
+[GIN-debug] GET    /series/:seriesid         --> github.com/fukaraca/worth2watch/api.GetThisSeries (5 handlers)
+[GIN-debug] GET    /series/list              --> github.com/fukaraca/worth2watch/api.GetSeriesWithPage (5 handlers)
+[GIN-debug] GET    /series/:seriesid/:season --> github.com/fukaraca/worth2watch/api.GetEpisodesForaSeason (5 handlers)
+[GIN-debug] GET    /getSimilarContent        --> github.com/fukaraca/worth2watch/api.GetSimilarContent (5 handlers)
+[GIN-debug] POST   /addFavorites             --> github.com/fukaraca/worth2watch/api.Auth.func1 (5 handlers)
+[GIN-debug] GET    /getFavorites             --> github.com/fukaraca/worth2watch/api.Auth.func1 (5 handlers)
+[GIN-debug] GET    /searchFavorites          --> github.com/fukaraca/worth2watch/api.Auth.func1 (5 handlers)
+[GIN-debug] POST   /addContentByID           --> github.com/fukaraca/worth2watch/api.Auth.func1 (5 handlers)
+[GIN-debug] POST   /addContentWithJSON       --> github.com/fukaraca/worth2watch/api.Auth.func1 (5 handlers)
+[GIN-debug] DELETE /deleteMovieByID          --> github.com/fukaraca/worth2watch/api.Auth.func1 (5 handlers)
+[GIN-debug] GET    /user/:username           --> github.com/fukaraca/worth2watch/api.Auth.func1 (5 handlers)
+[GIN-debug] POST   /register                 --> github.com/fukaraca/worth2watch/api.CheckRegistration (5 handlers)
+[GIN-debug] POST   /login                    --> github.com/fukaraca/worth2watch/api.Login (5 handlers)
+[GIN-debug] PATCH  /updateUser               --> github.com/fukaraca/worth2watch/api.Auth.func1 (5 handlers)
+[GIN-debug] POST   /logout                   --> github.com/fukaraca/worth2watch/api.Auth.func1 (5 handlers)
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN] 2022/04/17 - 14:45:26 | 400 |       1.092ms |             ::1 | GET      "/getSimilarContent?imdb-id)tt0120737&content-type=movie"
+[GIN] 2022/04/17 - 14:45:33 | 400 |       428.9µs |             ::1 | GET      "/getSimilarContent?imdb-id=tt0120737&content-type=movie"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /movies/:id               --> github.com/fukaraca/worth2watch/api.GetThisMovie (5 handlers)
+[GIN-debug] GET    /movies/list              --> github.com/fukaraca/worth2watch/api.GetMoviesWithPage (5 handlers)
+[GIN-debug] GET    /searchContent            --> github.com/fukaraca/worth2watch/api.SearchContent (5 handlers)
+[GIN-debug] GET    /series/:seriesid         --> github.com/fukaraca/worth2watch/api.GetThisSeries (5 handlers)
+[GIN-debug] GET    /series/list              --> github.com/fukaraca/worth2watch/api.GetSeriesWithPage (5 handlers)
+[GIN-debug] GET    /series/:seriesid/:season --> github.com/fukaraca/worth2watch/api.GetEpisodesForaSeason (5 handlers)
+[GIN-debug] GET    /getSimilarContent        --> github.com/fukaraca/worth2watch/api.GetSimilarContent (5 handlers)
+[GIN-debug] POST   /addFavorites             --> github.com/fukaraca/worth2watch/api.Auth.func1 (5 handlers)
+[GIN-debug] GET    /getFavorites             --> github.com/fukaraca/worth2watch/api.Auth.func1 (5 handlers)
+[GIN-debug] GET    /searchFavorites          --> github.com/fukaraca/worth2watch/api.Auth.func1 (5 handlers)
+[GIN-debug] POST   /addContentByID           --> github.com/fukaraca/worth2watch/api.Auth.func1 (5 handlers)
+[GIN-debug] POST   /addContentWithJSON       --> github.com/fukaraca/worth2watch/api.Auth.func1 (5 handlers)
+[GIN-debug] DELETE /deleteMovieByID          --> github.com/fukaraca/worth2watch/api.Auth.func1 (5 handlers)
+[GIN-debug] GET    /user/:username           --> github.com/fukaraca/worth2watch/api.Auth.func1 (5 handlers)
+[GIN-debug] POST   /register                 --> github.com/fukaraca/worth2watch/api.CheckRegistration (5 handlers)
+[GIN-debug] POST   /login                    --> github.com/fukaraca/worth2watch/api.Login (5 handlers)
+[GIN-debug] PATCH  /updateUser               --> github.com/fukaraca/worth2watch/api.Auth.func1 (5 handlers)
+[GIN-debug] POST   /logout                   --> github.com/fukaraca/worth2watch/api.Auth.func1 (5 handlers)
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN] 2022/04/17 - 14:45:57 | 400 |       585.9µs |             ::1 | GET      "/getSimilarContent?imdb-id=tt0120737&content-type=movie"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /movies/:id               --> github.com/fukaraca/worth2watch/api.GetThisMovie (5 handlers)
+[GIN-debug] GET    /movies/list              --> github.com/fukaraca/worth2watch/api.GetMoviesWithPage (5 handlers)
+[GIN-debug] GET    /searchContent            --> github.com/fukaraca/worth2watch/api.SearchContent (5 handlers)
+[GIN-debug] GET    /series/:seriesid         --> github.com/fukaraca/worth2watch/api.GetThisSeries (5 handlers)
+[GIN-debug] GET    /series/list              --> github.com/fukaraca/worth2watch/api.GetSeriesWithPage (5 handlers)
+[GIN-debug] GET    /series/:seriesid/:season --> github.com/fukaraca/worth2watch/api.GetEpisodesForaSeason (5 handlers)
+[GIN-debug] GET    /getSimilarContent        --> github.com/fukaraca/worth2watch/api.GetSimilarContent (5 handlers)
+[GIN-debug] POST   /addFavorites             --> github.com/fukaraca/worth2watch/api.Auth.func1 (5 handlers)
+[GIN-debug] GET    /getFavorites             --> github.com/fukaraca/worth2watch/api.Auth.func1 (5 handlers)
+[GIN-debug] GET    /searchFavorites          --> github.com/fukaraca/worth2watch/api.Auth.func1 (5 handlers)
+[GIN-debug] POST   /addContentByID           --> github.com/fukaraca/worth2watch/api.Auth.func1 (5 handlers)
+[GIN-debug] POST   /addContentWithJSON       --> github.com/fukaraca/worth2watch/api.Auth.func1 (5 handlers)
+[GIN-debug] DELETE /deleteMovieByID          --> github.com/fukaraca/worth2watch/api.Auth.func1 (5 handlers)
+[GIN-debug] GET    /user/:username           --> github.com/fukaraca/worth2watch/api.Auth.func1 (5 handlers)
+[GIN-debug] POST   /register                 --> github.com/fukaraca/worth2watch/api.CheckRegistration (5 handlers)
+[GIN-debug] POST   /login                    --> github.com/fukaraca/worth2watch/api.Login (5 handlers)
+[GIN-debug] PATCH  /updateUser               --> github.com/fukaraca/worth2watch/api.Auth.func1 (5 handlers)
+[GIN-debug] POST   /logout                   --> github.com/fukaraca/worth2watch/api.Auth.func1 (5 handlers)
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN] 2022/04/17 - 14:52:07 | 200 |     19.6207ms |             ::1 | GET      "/getSimilarContent?imdb-id=tt0120737&content-type=movie"

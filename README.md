@@ -9,7 +9,7 @@ Features:
 - You can manage contents with admin role by adding with IMDB-ID, raw-JSON and delete content by IMDB-ID
 - Users can add/delete movie/series to their Favorites and search by genre and content name
 - On public access, any guest can request movies list , a specific movie, series list, a specific series along with its seasons and episodes. Additionally, the guest can search by genre and content name.
-- Dockerized PostgreSQL and Redis by docker-compose. (application will be Dockerized)
+- Dockerized application, PostgreSQL and Redis by docker-compose.
 
 ## Get Started
 
@@ -18,18 +18,18 @@ git clone https://github.com/fukaraca/worth2watch.git
 ```
 
 
-- Insert API key to env file
-- If you will use provided docker-compose file, after started Docker daemon, run
+- Insert API key to env file which's been provided by [TMDB](https://www.themoviedb.org).
+- If you use provided docker-compose file, uncomment the stated lines properly and delete the prioring. After starting Docker daemon, run
  `docker-compose up -d` .
 
-Now, Psql and Redis running. In order to fetch movie data from TMDB API, you need a valid API key which's provided by [TMDB](https://www.themoviedb.org). 
-You can insert that code into config.env file.
+Now, PostgreSQL, Redis and application must be running. 
 
-And we can start:
+In case using local Psql and Redis, You need to create a database and name it in accordance with config.env>>DB_NAME value. 
+And now, you can simply 
 
 ` go run .`
 
-On initial running, application will create required tables automatically, and you only need to register, log-in, and add-content you wish to.
+On initial run, application will create required tables automatically, you only need to register, log-in, and add-content you wish to.
 
 ## Endpoints
 

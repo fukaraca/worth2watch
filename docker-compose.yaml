@@ -1,6 +1,6 @@
 version: '3.8'
 services:
-  db:
+  postgresdb:
     image: postgres:14.2-alpine
     environment:
       - POSTGRES_USER=postgres
@@ -8,14 +8,31 @@ services:
     ports:
       - '5432:5432'
     volumes:
-      - ./db/setup.sql:/docker-entrypoint-initdb.d/create-db.sql
+      - ./db/setup.sql:/docker-entrypoint-initdb.d/setup.sql
       - ./db/volume:/var/lib/postgresql/data
-  cache:
+    networks:
+      - mynet
+  rediscache:
     image: redis:alpine
     restart: on-failure
-    hostname: localhost
     ports:
       - '6379:6379'
+    networks:
+      - mynet
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - cache
+      - postgresdb
+    networks:
+      - mynet
+    ports:
+      - '8080:8080'
 volumes:
   db:
     driver: local
+networks:
+  mynet:
+    driver: bridge

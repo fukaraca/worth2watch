@@ -17,19 +17,12 @@ Features:
 git clone https://github.com/fukaraca/worth2watch.git
 ```
 
-TLDR; 
 
 - Insert API key to env file
-- If you will use provided docker-compose file, follow instructions. (if you have a solution with the issue, any kind of feedback or PR is accepted gratefully)
+- If you will use provided docker-compose file, after started Docker daemon, run `docker-compose up -d` .
 
-In order to initialize the application, PostgreSQL and Redis must be running with required environment values. (see config/config.env)
-You can use your Psql and Redis, also if you want, you can use given Dockerized version. 
- 
-Note: If you will use provided docker-compose file, on "docker-compose up" step, at first Psql will not be accepting request due to user previlige-and persistent volume permissions conflict.
-To handle it following post can help. [Stackoverflow](https://stackoverflow.com/a/71827179/12664011)
-
-Now, Psql and Redis running, we must create a database as per in config.env . Application doesn't create database, 
-so we must create it beforehand. Also API key that was provided by [TMDB](https://www.themoviedb.org) must be inserted to config.env file.
+Now, Psql and Redis running. In order to fetch movie data from TMDB API, you need a valid API key which's provided by [TMDB](https://www.themoviedb.org). 
+You can insert that code into config.env file.
 
 And we can start:
 

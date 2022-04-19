@@ -19,7 +19,8 @@ git clone https://github.com/fukaraca/worth2watch.git
 
 
 - Insert API key to env file
-- If you will use provided docker-compose file, after started Docker daemon, run `docker-compose up -d` .
+- If you will use provided docker-compose file, after started Docker daemon, run
+ `docker-compose up -d` .
 
 Now, Psql and Redis running. In order to fetch movie data from TMDB API, you need a valid API key which's provided by [TMDB](https://www.themoviedb.org). 
 You can insert that code into config.env file.
@@ -28,6 +29,7 @@ And we can start:
 
 ` go run .`
 
+On initial running, application will create required tables automatically, and you only need to register, log-in, and add-content you wish to.
 
 ## Endpoints
 

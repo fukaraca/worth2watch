@@ -19,12 +19,14 @@ git clone https://github.com/fukaraca/worth2watch.git
 
 
 - Insert API key to env file which's been provided by [TMDB](https://www.themoviedb.org).
-- If you use provided docker-compose file, uncomment the stated lines properly and delete the prioring. After starting Docker daemon, run
+- If you use provided docker-compose file(this is the default setting), after starting Docker daemon, run
  `docker-compose up -d` .
 
 Now, PostgreSQL, Redis and application must be running. 
 
 In case using local Psql and Redis, You need to create a database and name it in accordance with config.env>>DB_NAME value. 
+Also you must uncomment the stated lines on config.env properly and delete the prioring keys.
+This is a must because former values were for Dockerized option. Since you are using localhost, it needs to be changed.  
 And now, you can simply 
 
 ` go run .`

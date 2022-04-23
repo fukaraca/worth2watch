@@ -24,8 +24,9 @@ services:
       context: .
       dockerfile: Dockerfile
     depends_on:
-      - cache
       - postgresdb
+      - rediscache
+    restart: on-failure
     networks:
       - mynet
     ports:

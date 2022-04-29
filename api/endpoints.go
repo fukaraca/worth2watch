@@ -7,6 +7,7 @@ import (
 var R *gin.Engine
 
 func Endpoints() {
+	//naming convention for URL paths are designated for readability
 
 	//public
 	R.GET("/movies/:id", GetThisMovie)

@@ -89,7 +89,7 @@ func CheckRegistration(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{
+	c.JSON(http.StatusCreated, gin.H{
 		"notification": "account created successfully",
 	})
 }
@@ -224,7 +224,7 @@ func AddContentByID(c *gin.Context) {
 		})
 		return
 	}
-	c.JSON(http.StatusOK, gin.H{
+	c.JSON(http.StatusCreated, gin.H{
 		"notification": "content will be inserted shortly after",
 	})
 }
@@ -242,10 +242,6 @@ func AddContentWithJSON(c *gin.Context) {
 		log.Println("unauthorized attempt by user:", username)
 		return
 	}
-	/*	inputJSON := struct {
-		ContentType string `json:"content-type"`
-		RawData     *model.Movie `json:"content-raw-data"`
-	}{}*/
 
 	contentType := c.PostForm("content-type")
 	inputJSON := c.PostForm("content-raw-data")
@@ -295,7 +291,7 @@ func AddContentWithJSON(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{
+	c.JSON(http.StatusCreated, gin.H{
 		"notification": "content has been created successfully",
 	})
 }
@@ -629,7 +625,7 @@ func AddToFavorites(c *gin.Context) {
 		})
 		return
 	}
-	c.JSON(http.StatusOK, gin.H{
+	c.JSON(http.StatusCreated, gin.H{
 		"notification": "content has been added successfully",
 	})
 }

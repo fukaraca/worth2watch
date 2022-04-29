@@ -12,5 +12,5 @@ func main() {
 	defer db.Cache.Close()
 
 	api.Endpoints()
-	log.Fatalln("router has encountered an error while main.run: ", model.R.Run(model.ServerPort))
+	log.Fatalln("router has encountered an error while main.run: ", api.R.Run(model.ServerPort))
 }

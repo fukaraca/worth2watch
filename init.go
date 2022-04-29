@@ -1,8 +1,8 @@
 package main
 
 import (
+	"github.com/fukaraca/worth2watch/api"
 	"github.com/fukaraca/worth2watch/db"
-	"github.com/fukaraca/worth2watch/model"
 	"github.com/gin-contrib/requestid"
 	"github.com/gin-gonic/gin"
 	"go.uber.org/ratelimit"
@@ -24,7 +24,7 @@ func init() {
 	gin.DefaultWriter = io.MultiWriter(logfile, os.Stdout)
 	gin.DefaultErrorWriter = io.MultiWriter(errlogfile, os.Stdout)
 	//starts with builtin Logger() and Recovery() middlewares
-	model.R = gin.Default()
+	api.R = gin.Default()
 
 	//rate limiter
 	rLimit := ratelimit.New(20)
@@ -33,8 +33,8 @@ func init() {
 			limiter.Take()
 		}
 	}
-	model.R.Use(leakBucket(rLimit))
-	model.R.Use(requestid.New())
+	api.R.Use(leakBucket(rLimit))
+	api.R.Use(requestid.New())
 	db.ConnectDB()
 	db.CheckIfInitialized()
 	db.CreateRedisClient()

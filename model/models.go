@@ -2,11 +2,8 @@ package model
 
 import (
 	"github.com/fukaraca/worth2watch/config"
-	"github.com/gin-gonic/gin"
 	"github.com/jackc/pgtype"
 )
-
-var R *gin.Engine
 
 var TIMEOUT = config.GetEnv.GetDuration("TIMEOUT")
 var ServerHost = config.GetEnv.GetString("SERVER_HOST")
